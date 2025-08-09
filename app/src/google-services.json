@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "705183589822",
+    "project_id": "sheguard-20cbd",
+    "storage_bucket": "sheguard-20cbd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:705183589822:android:147ee6f209558855e8c5ef",
+        "android_client_info": {
+          "package_name": "com.nodalink.sheguard"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCl6Q9XAEWM02KrsFIoHi1AdzVcH-wFiU0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
