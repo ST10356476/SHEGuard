@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="bottom_nav_text_color_selected">#6A1B9A</color>
+    <color name="bottom_nav_text_color_unselected">#999999</color>
+    <color name="bottom_nav_icon_color_selected">#6A1B9A</color>
+    <color name="bottom_nav_icon_color_unselected">#999999</color>
 </resources>
