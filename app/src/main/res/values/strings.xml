@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">SHEGuard</string>
+    <string name="select_emergency_contacts">Select Emergency Contacts</string>
+    <string name="add">+ Add</string>
+    <string name="choose_message">Choose Message</string>
+    <string name="going_out">Going Out</string>
+    <string name="working_late">Working Late</string>
+    <string name="traveling">Traveling</string>
+    <string name="on_date">On a Date</string>
+    <string name="custom_message_hint">Or write your custom message here...</string>
+    <string name="cancel">Cancel</string>
+    <string name="send_whatsapp">Send via WhatsApp</string>
+    <string name="back_button_desc">Go back</string>
+    <string name="logo_desc">SHETrack app logo</string>
 </resources>
