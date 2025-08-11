@@ -207,10 +207,9 @@
         android:layout_alignParentBottom="true"
         android:background="@drawable/bottom_nav_background"
         app:labelVisibilityMode="labeled"
-        app:itemTextAppearance="@style/BottomNavigationView.ItemTextAppearance"
         app:itemIconSize="24dp"
-        app:itemTextColor="@color/bottom_nav_text_color"
+        app:itemTextColor="@color/bottom_nav_text_color_selected"
         app:elevation="8dp"
-        app:menu="@menu/bottom_nav_menu" />
+        app:menu="@menu/bottom_navigation" />
 
 </RelativeLayout>

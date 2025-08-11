@@ -4,22 +4,18 @@
         android:id="@+id/nav_home"
         android:icon="@drawable/home_icon"
         android:title="Home" />
-
     <item
-        android:id="@+id/nav_she_track"
+        android:id="@+id/nav_track"
         android:icon="@drawable/location_icon"
-        android:title="SHETrack" />
-
+        android:title="Track" />
     <item
         android:id="@+id/nav_vault"
         android:icon="@drawable/lock"
         android:title="Vault" />
-
     <item
         android:id="@+id/nav_care"
         android:icon="@drawable/heart"
         android:title="Care" />
-
     <item
         android:id="@+id/nav_settings"
         android:icon="@drawable/cogwheel"
