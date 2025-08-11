@@ -6,17 +6,16 @@
     android:layout_height="match_parent"
     android:background="@drawable/purple_gradient_background">
 
-    <!-- Top Bar -->
     <LinearLayout
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:background="@android:color/white"
         android:paddingHorizontal="20dp"
         android:paddingTop="24dp">
 
-        <!-- Logo and App Name -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -28,7 +27,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/sheguard_logo"
-                android:scaleType="fitCenter" />
+            android:scaleType="fitCenter" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -37,11 +36,9 @@
                 android:text="SHEGuard"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/white" />
-
+                android:textColor="#6A1B9A" />
         </LinearLayout>
 
-        <!-- Profile Icon -->
         <ImageButton
             android:id="@+id/profile_icon"
             android:layout_width="40dp"
@@ -51,12 +48,11 @@
             android:focusable="true"
             android:padding="8dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/profile_icon"
-            tools:ignore="TouchTargetSizeCheck" />
-
+            android:src="@drawable/profile_icon" />
     </LinearLayout>
 
-    <!-- Main Content -->
+
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -72,7 +68,7 @@
             android:paddingHorizontal="24dp"
             android:paddingVertical="20dp">
 
-            <!-- Title and Subtitle -->
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -92,15 +88,15 @@
                 android:textColor="#E1BEE7"
                 android:gravity="center" />
 
-            <!-- Panic Button -->
 
-            <!-- Instructions -->
+
+
             <LinearLayout
                 android:id="@+id/panic_button"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_marginTop="40dp"
-                android:background="@drawable/button_background"
+                android:background="@drawable/panic_button_background"
                 android:clickable="true"
                 android:elevation="8dp"
                 android:focusable="true"
@@ -108,19 +104,11 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="260dp"
-                    android:layout_height="260dp"
+                    android:layout_width="190dp"
+                    android:layout_height="200dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/she_sos" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="SOS"
-                    android:textColor="@android:color/white"
-                    android:textSize="32sp"
-                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -134,7 +122,7 @@
                 android:gravity="center"
                 android:lineSpacingExtra="2dp" />
 
-            <!-- Action Buttons Row -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -143,7 +131,7 @@
                 android:gravity="center"
                 android:weightSum="2">
 
-                <!-- Secure Vault Button -->
+
                 <LinearLayout
                     android:id="@+id/secure_vault_button"
                     android:layout_width="0dp"
@@ -187,7 +175,7 @@
 
                 </LinearLayout>
 
-                <!-- SHETrack Button -->
+
                 <LinearLayout
                     android:id="@+id/she_track_button"
                     android:layout_width="0dp"
