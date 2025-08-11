@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/purple_gradient_background">
+
+
+    <LinearLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@android:color/white"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="24dp">
+
+
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:contentDescription="@string/back_button_desc"
+            android:focusable="true"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/left_arrow"
+            tools:ignore="TouchTargetSizeCheck" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginStart="8dp">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/sheguard_logo"
+                android:scaleType="fitCenter"
+                android:contentDescription="@string/logo_desc" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="All Files"
+                android:textColor="#6A1B9A"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:id="@+id/filter_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/top_bar"
+        android:layout_marginTop="1dp"
+        android:background="@drawable/light_purple_box_background"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="16dp">
+
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="false"
+            android:scrollbars="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+
+                <Button
+                    android:id="@+id/filter_all_button"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@drawable/filter_button_selected_background"
+                    android:minWidth="0dp"
+                    android:paddingHorizontal="16dp"
+                    android:text="All (12)"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+
+                <Button
+                    android:id="@+id/filter_photos_button"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@drawable/filter_button_background"
+                    android:minWidth="0dp"
+                    android:paddingHorizontal="16dp"
+                    android:text=" Photos "
+                    android:textAllCaps="false"
+                    android:textColor="#E1BEE7"
+                    android:textSize="12sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+
+                <Button
+                    android:id="@+id/filter_videos_button"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@drawable/filter_button_background"
+                    android:minWidth="0dp"
+                    android:paddingHorizontal="16dp"
+                    android:text=" Videos "
+                    android:textAllCaps="false"
+                    android:textColor="#E1BEE7"
+                    android:textSize="12sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+
+                <Button
+                    android:id="@+id/filter_audio_button"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@drawable/filter_button_background"
+                    android:minWidth="0dp"
+                    android:paddingHorizontal="16dp"
+                    android:text=" Audio "
+                    android:textAllCaps="false"
+                    android:textColor="#E1BEE7"
+                    android:textSize="12sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+
+                <Button
+                    android:id="@+id/filter_documents_button"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:background="@drawable/filter_button_background"
+                    android:minWidth="0dp"
+                    android:paddingHorizontal="16dp"
+                    android:text=" Documents "
+                    android:textAllCaps="false"
+                    android:textColor="#E1BEE7"
+                    android:textSize="12sp"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/files_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/filter_section"
+        android:layout_alignParentBottom="true"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="80dp"
+        android:clipToPadding="false"
+        android:scrollbars="vertical" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_file_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="36dp"
+        android:contentDescription="Add Files"
+        android:src="@drawable/add_sign"
+        app:backgroundTint="#FF7043"
+        app:borderWidth="0dp"
+        app:elevation="8dp"
+        app:fabSize="normal"
+        app:pressedTranslationZ="12dp"
+        app:tint="#FFFFFF" />
+
+</RelativeLayout>
