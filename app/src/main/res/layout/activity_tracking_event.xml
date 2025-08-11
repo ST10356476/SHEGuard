@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/purple_gradient_background">
@@ -17,16 +18,17 @@
         android:paddingTop="24dp">
 
 
-        <ImageView
+        <ImageButton
             android:id="@+id/back_button"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/left_arrow"
             android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
             android:padding="8dp"
             android:scaleType="fitCenter"
-            android:clickable="true"
-            android:focusable="true" />
+            android:src="@drawable/left_arrow"
+            tools:ignore="TouchTargetSizeCheck" />
 
 
         <LinearLayout
@@ -206,10 +208,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/bottom_nav_background"
-        app:labelVisibilityMode="labeled"
-        app:itemIconSize="24dp"
-        app:itemTextColor="@color/bottom_nav_text_color_selected"
         app:elevation="8dp"
-        app:menu="@menu/bottom_navigation" />
+        app:itemIconSize="24dp"
+        app:itemIconTint=""
+        app:itemTextColor="@color/bottom_nav_text_color_selected"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_navigation_menu" />
 
 </RelativeLayout>
