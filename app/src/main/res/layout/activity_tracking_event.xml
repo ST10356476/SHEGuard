@@ -210,7 +210,7 @@
         android:background="@drawable/bottom_nav_background"
         app:elevation="8dp"
         app:itemIconSize="24dp"
-        app:itemIconTint=""
+        app:itemIconTint="@null"
         app:itemTextColor="@color/bottom_nav_text_color_selected"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_navigation_menu" />

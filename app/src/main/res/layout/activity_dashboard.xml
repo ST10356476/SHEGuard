@@ -224,7 +224,7 @@
         android:background="@drawable/bottom_nav_background"
         app:labelVisibilityMode="labeled"
         app:itemIconSize="24dp"
-        app:itemIconTint="@color/transparent_icon_tint"
+        app:itemIconTint="@null"
         app:itemTextColor="@color/bottom_nav_text_colors"
         app:elevation="8dp"
         app:menu="@menu/bottom_navigation_menu" />
