@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F8F4F9"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:id="@+id/activity_register">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,15 +21,17 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginTop="24dp"
+            android:contentDescription=" "
             android:src="@drawable/sheguard_logo"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"
+            tools:ignore="HardcodedText" />
 
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="SHEGuard"
+            android:text="@string/sheguard"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="#6A1B9A" />
@@ -37,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="Create Your Shield"
+            android:text="@string/create_your_shield"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="#333333"
@@ -49,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginHorizontal="16dp"
-            android:text="Join thousands of women taking control of their safety"
+            android:text="@string/slogan"
             android:textSize="14sp"
             android:textColor="#666666"
             android:gravity="center" />
@@ -67,8 +71,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginBottom="16dp"
+                android:autofillHints="Enter full name"
                 android:background="@drawable/input_field_background"
-                android:hint="Full Name"
+                android:hint="@string/full_name"
                 android:textColorHint="#999999"
                 android:textColor="#333333"
                 android:textSize="16sp"
@@ -81,8 +86,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginBottom="16dp"
+                android:autofillHints="Enter Valid Email"
                 android:background="@drawable/input_field_background"
-                android:hint="Email"
+                android:hint="@string/email"
                 android:textColorHint="#999999"
                 android:textColor="#333333"
                 android:textSize="16sp"
@@ -95,8 +101,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginBottom="16dp"
+                android:autofillHints="Enter valid date of birth"
                 android:background="@drawable/input_field_background"
-                android:hint="Date of birth"
+                android:hint="@string/date_of_birth"
                 android:textColorHint="#999999"
                 android:textColor="#333333"
                 android:textSize="16sp"
@@ -111,8 +118,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginBottom="16dp"
+                android:autofillHints="Enter password"
                 android:background="@drawable/input_field_background"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:textColorHint="#999999"
                 android:textColor="#333333"
                 android:textSize="16sp"
@@ -125,8 +133,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginBottom="24dp"
+                android:autofillHints="Confirm Password"
                 android:background="@drawable/input_field_background"
-                android:hint="Confirm Password"
+                android:hint="@string/confirm_password"
                 android:textColorHint="#999999"
                 android:textColor="#333333"
                 android:textSize="16sp"
@@ -154,7 +163,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                android:text="I have read, understood and agree to the Terms and Conditions, understand that by creating this account my information will be handled according to SHEGuard's privacy policy."
+                android:text="@string/policy"
                 android:textSize="12sp"
                 android:textColor="#666666"
                 android:lineSpacingExtra="2dp" />
@@ -167,7 +176,7 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginBottom="16dp"
-            android:text="Sign up"
+            android:text="@string/sign_up"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@android:color/white"
@@ -184,7 +193,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Already have an account? "
+                android:text="@string/already_have_an_account"
                 android:textSize="14sp"
                 android:textColor="#666666" />
 
@@ -192,7 +201,7 @@
                 android:id="@+id/sign_in_link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sign in"
+                android:text="@string/sign_in"
                 android:textSize="14sp"
                 android:textColor="#6A1B9A"
                 android:textStyle="bold"

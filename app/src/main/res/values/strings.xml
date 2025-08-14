@@ -12,4 +12,16 @@
     <string name="send_whatsapp">Send via WhatsApp</string>
     <string name="back_button_desc">Go back</string>
     <string name="logo_desc">SHETrack app logo</string>
+    <string name="sign_in">Sign in</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="policy">I have read, understood and agree to the Terms and Conditions, understand that by creating this account my information will be handled according to SHEGuard\'s privacy policy.</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="password">Password</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="email">Email</string>
+    <string name="full_name">Full Name</string>
+    <string name="slogan">Join thousands of women taking control of their safety</string>
+    <string name="create_your_shield">Create Your Shield</string>
+    <string name="sheguard">SHEGuard</string>
 </resources>

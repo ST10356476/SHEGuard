@@ -1,12 +1,12 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-   // id("com.google.gms.google-services")
+    id("com.google.gms.google-services")
 }
 
 android {
     namespace = "com.iiest10356476.sheguard"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.iiest10356476.sheguard"
@@ -31,8 +31,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = "11"
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
+        }
     }
 }
 
@@ -43,11 +45,33 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    // Firebase module Dependencies
-   // implementation(platform("com.google.firebase:firebase-bom:34.1.0"))
-   // implementation("com.google.firebase:firebase-analytics")
+    // Firebase BOM
+    implementation (platform("com.google.firebase:firebase-bom:34.1.0"))
+
+    // Firebase Authentication
+    implementation ("com.google.firebase:firebase-auth")
+
+    // Firebase Firestore
+    implementation ("com.google.firebase:firebase-firestore")
+
+    // Coroutines
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.10.2")
+
+    // ViewModel and LiveData
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.2")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.9.2")
+    implementation ("androidx.fragment:fragment-ktx:1.8.9")
+
+    // Biometric for future use
+    implementation ("androidx.biometric:biometric:1.1.0")
+
+    // Encrypted Shared Preferences
+    implementation ("androidx.security:security-crypto:1.1.0")
+
 }

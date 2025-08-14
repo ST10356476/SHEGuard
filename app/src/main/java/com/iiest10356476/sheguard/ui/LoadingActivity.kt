@@ -1,4 +1,4 @@
-package com.iiest10356476.sheguard
+package com.iiest10356476.sheguard.ui
 
 import android.animation.ObjectAnimator
 import android.content.Intent
@@ -9,6 +9,7 @@ import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.iiest10356476.sheguard.R
 
 class LoadingActivity : AppCompatActivity() {
 

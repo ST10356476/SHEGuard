@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -12,41 +17,43 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SHEGuard"
         tools:targetApi="31">
+
+
         <activity
-            android:name=".SecureVaultViewAll"
+            android:name=".ui.SecureVaultViewAll"
             android:exported="false" />
         <activity
-            android:name=".SecureVault"
+            android:name=".ui.SecureVault"
             android:exported="false" />
         <activity
-            android:name=".TrackingEventOperationActivity"
+            android:name=".ui.TrackingEventOperationActivity"
             android:exported="false" />
         <activity
-            android:name=".TrackingEventActivity"
+            android:name=".ui.TrackingEventActivity"
             android:exported="false" />
         <activity
-            android:name=".DashboardActivity"
+            android:name=".ui.DashboardActivity"
             android:exported="false" />
         <activity
-            android:name=".NewPasswordActivity"
+            android:name=".ui.auth.NewPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".ForgotPasswordActivity"
+            android:name=".ui.auth.ForgotPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.auth.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".ui.auth.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".GetStartedActivity"
+            android:name=".ui.GetStartedActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".LoadingActivity"
+            android:name=".ui.LoadingActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
