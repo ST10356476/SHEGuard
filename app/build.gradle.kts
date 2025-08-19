@@ -40,12 +40,30 @@ android {
 
 dependencies {
 
+
+    //This is for Location Service, Don't take it out please
+    implementation("com.google.android.gms:play-services-location:21.3.0")
+    //Media Background accessibility
+    implementation("androidx.media:media:1.7.1")
+    implementation("androidx.core:core-ktx:1.17.0")
+
+    implementation("androidx.camera:camera-core:1.4.2")
+// CameraX core
+    implementation("androidx.camera:camera-camera2:1.4.2")
+    implementation("androidx.camera:camera-lifecycle:1.3.4")
+    implementation("androidx.camera:camera-view:1.4.2")
+    implementation("com.google.guava:guava:33.4.8-android")
+
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.material)
+    implementation(libs.androidx.camera.video)
+    implementation(libs.androidx.lifecycle.service)
+    implementation(libs.androidx.camera.lifecycle)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

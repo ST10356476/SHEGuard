@@ -156,6 +156,14 @@
                         android:textStyle="bold"
                         android:textColor="@android:color/white"
                         android:gravity="center" />
+                    <!--Remember to take out the button -->
+
+                    <Button
+                        android:id="@+id/btn_open_vault"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Open Secure Vault"
+                        android:layout_centerInParent="true" />
 
                     <TextView
                         android:layout_width="wrap_content"

@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.iiest10356476.sheguard.R
 import com.iiest10356476.sheguard.ui.auth.LoginActivity
 import com.iiest10356476.sheguard.viewmodel.AuthViewModel
@@ -19,6 +20,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        findViewById<BottomNavigationView>(R.id.bottom_navigation)
+
 
         Log.d("MainActivity", "MainActivity created - determining user flow")
 
