@@ -19,7 +19,6 @@
     <style name="Widget.SheGuard.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="itemIconTint">@null</item>
         <!-- Keep your text color separate, for example -->
-        <item name="itemTextColor">@color/bottom_nav_text_color_selected</item>
     </style>
           <!-- Base application theme. -->
     <style name="Theme.SheGuard" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -43,9 +42,6 @@
         <!-- res/values/styles.xml (or wherever you define your styles) -->
     <style name="MyCustomBottomNavStyle" parent="Widget.MaterialComponents.BottomNavigationView">
         <!-- Your custom attributes here -->
-        <item name="android:background">@color/bottom_nav_icon_color_selected</item>
-        <item name="itemIconTint">@color/bottom_nav_icon_color_selected</item>
-        <item name="itemTextColor">@color/bottom_nav_icon_color_selected</item>
     </style>
 
         <!-- res/values/themes.xml -->

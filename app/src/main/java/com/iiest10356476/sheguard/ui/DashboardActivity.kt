@@ -2,11 +2,12 @@ package com.iiest10356476.sheguard.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
+import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.iiest10356476.sheguard.R
 
 class DashboardActivity : AppCompatActivity() {
@@ -22,11 +23,65 @@ class DashboardActivity : AppCompatActivity() {
             insets
         }
 
-        // Set up button click OUTSIDE the insets listener
-        val openVaultButton = findViewById<Button>(R.id.btn_open_vault)
+        // Set up secure vault button click
+        val openVaultButton = findViewById<LinearLayout>(R.id.secure_vault_button)
         openVaultButton.setOnClickListener {
             val intent = Intent(this, SecureVault::class.java)
             startActivity(intent)
         }
+
+        // Set up SHETrack button click
+        val sheTrackButton = findViewById<LinearLayout>(R.id.she_track_button)
+        sheTrackButton.setOnClickListener {
+            // Navigate to SHETrack activity
+            // val intent = Intent(this, SHETrackActivity::class.java)
+            // startActivity(intent)
+        }
+
+        // Set up panic button click
+        val panicButton = findViewById<LinearLayout>(R.id.panic_button)
+        panicButton.setOnClickListener {
+            // Handle panic button functionality
+            // This should trigger emergency protocols
+        }
+
+        // Set up bottom navigation
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    // Already on home/dashboard - no action needed Or refresh the current view
+                    true
+                }
+                R.id.nav_shetrack -> {
+                    // Navigate to SHETrack activity
+                    // val intent = Intent(this, SHETrackActivity::class.java)
+                    // startActivity(intent)
+                    true
+                }
+                R.id.nav_vault -> {
+                    // Navigate to Secure Vault
+                    val intent = Intent(this, SecureVault::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.nav_community -> {
+                    // Navigate to Community activity
+                    // val intent = Intent(this, CommunityActivity::class.java)
+                    // startActivity(intent)
+                    true
+                }
+                R.id.nav_settings -> {
+                    // Navigate to Settings activity
+                    // val intent = Intent(this, SettingsActivity::class.java)
+                    // startActivity(intent)
+                    true
+                }
+                else -> false
+            }
+        }
+
+        // Set the current item as selected (Home)
+        bottomNavigation.selectedItemId = R.id.nav_home
     }
 }

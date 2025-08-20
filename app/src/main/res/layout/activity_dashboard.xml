@@ -156,14 +156,6 @@
                         android:textStyle="bold"
                         android:textColor="@android:color/white"
                         android:gravity="center" />
-                    <!--Remember to take out the button -->
-
-                    <Button
-                        android:id="@+id/btn_open_vault"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Open Secure Vault"
-                        android:layout_centerInParent="true" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -226,17 +218,17 @@
 
     </ScrollView>
 
-    <!-- Updated Bottom Navigation -->
+    <!-- Fixed Bottom Navigation with Vector Icons -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/bottom_nav_background"
-        app:labelVisibilityMode="labeled"
-        app:itemIconSize="24dp"
-        app:itemIconTint="@null"
-        app:itemTextColor="@color/bottom_nav_text_colors"
         app:elevation="8dp"
+        app:itemIconSize="24dp"
+        app:itemIconTint=" "
+        app:itemTextColor="@color/bottom_nav_text_colors"
+        app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_navigation_menu" />
 </RelativeLayout>
