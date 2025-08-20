@@ -5,7 +5,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.iiest10356476.sheguard.data.models.Vault
 import kotlinx.coroutines.tasks.await
+import java.util.Collections.emptyList
 import java.util.UUID
+import kotlin.Result
 
 class VaultRepository {
 

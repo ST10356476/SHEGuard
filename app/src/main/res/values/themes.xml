@@ -6,14 +6,20 @@
 
         <!-- Apply our custom BottomNavigationView style globally -->
         <item name="bottomNavigationViewStyle">@style/Widget.SheGuard.BottomNavigationView</item>
+
+        <!-- Optional: Disable control colors to avoid unwanted tinting from the theme -->
+        <item name="colorControlNormal">@null</item>
+        <item name="colorControlActivated">@null</item>
     </style>
 
     <!-- App theme -->
     <style name="Theme.SHEGuard" parent="Base.Theme.SHEGuard" />
 
-    <!-- Custom BottomNavigationView style with no tint -->
+    <!-- Custom BottomNavigationView style with no icon tint -->
     <style name="Widget.SheGuard.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="itemIconTint">@null</item>
+        <!-- Keep your text color separate, for example -->
+        <item name="itemTextColor">@color/bottom_nav_text_color_selected</item>
     </style>
           <!-- Base application theme. -->
     <style name="Theme.SheGuard" parent="Theme.MaterialComponents.DayNight.NoActionBar">
