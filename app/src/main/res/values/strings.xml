@@ -1,17 +1,17 @@
 <resources>
     <string name="app_name">SHEGuard</string>
     <string name="select_emergency_contacts">Select Emergency Contacts</string>
-    <string name="add">+ Add</string>
+    <string name="add">Add</string>
     <string name="choose_message">Choose Message</string>
     <string name="going_out">Going Out</string>
     <string name="working_late">Working Late</string>
     <string name="traveling">Traveling</string>
     <string name="on_date">On a Date</string>
-    <string name="custom_message_hint">Or write your custom message here...</string>
+    <string name="custom_message_hint">Type your custom message here...</string>
     <string name="cancel">Cancel</string>
-    <string name="send_whatsapp">Send via WhatsApp</string>
-    <string name="back_button_desc">Go back</string>
-    <string name="logo_desc">SHETrack app logo</string>
+    <string name="send_whatsapp">Start Live Tracking</string>
+    <string name="back_button_desc">Back button</string>
+    <string name="logo_desc">SHEGuard logo</string>
     <string name="sign_in">Sign in</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="sign_up">Sign up</string>
@@ -24,4 +24,8 @@
     <string name="slogan">Join thousands of women taking control of their safety</string>
     <string name="create_your_shield">Create Your Shield</string>
     <string name="sheguard">SHEGuard</string>
+    <string name="volume_button_service_description">Detect volume button presses for panic recording.</string>
+    <string name="accessibility_service_description">Volume button service for SHEGuard</string>
+
+
 </resources>

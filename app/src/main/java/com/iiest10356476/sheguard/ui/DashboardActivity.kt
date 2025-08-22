@@ -33,9 +33,8 @@ class DashboardActivity : AppCompatActivity() {
         // Set up SHETrack button click
         val sheTrackButton = findViewById<LinearLayout>(R.id.she_track_button)
         sheTrackButton.setOnClickListener {
-            // Navigate to SHETrack activity
-            // val intent = Intent(this, SHETrackActivity::class.java)
-            // startActivity(intent)
+            val intent = Intent(this, TrackingEventActivity::class.java)
+            startActivity(intent)
         }
 
         // Set up panic button click
@@ -50,17 +49,15 @@ class DashboardActivity : AppCompatActivity() {
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
-                    // Already on home/dashboard - no action needed Or refresh the current view
+                    // Already on home/dashboard - no action needed
                     true
                 }
                 R.id.nav_shetrack -> {
-                    // Navigate to SHETrack activity
-                    // val intent = Intent(this, SHETrackActivity::class.java)
-                    // startActivity(intent)
+                    val intent = Intent(this, TrackingEventActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 R.id.nav_vault -> {
-                    // Navigate to Secure Vault
                     val intent = Intent(this, SecureVault::class.java)
                     startActivity(intent)
                     true

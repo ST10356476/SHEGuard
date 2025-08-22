@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("com.google.gms.google-services")
+
 }
 
 android {
@@ -40,6 +41,7 @@ android {
 
 dependencies {
 
+    implementation("com.github.bumptech.glide:glide:4.15.1")
 
     //This is for Location Service, Don't take it out please
     implementation("com.google.android.gms:play-services-location:21.3.0")
@@ -54,7 +56,7 @@ dependencies {
     implementation("androidx.camera:camera-view:1.4.2")
     implementation("com.google.guava:guava:33.4.8-android")
 
-
+    implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -64,6 +66,7 @@ dependencies {
     implementation(libs.androidx.camera.video)
     implementation(libs.androidx.lifecycle.service)
     implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.play.services.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -76,6 +79,7 @@ dependencies {
 
     // Firebase Firestore
     implementation ("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-storage-ktx:20.3.0")
 
     // Coroutines
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
@@ -91,5 +95,8 @@ dependencies {
 
     // Encrypted Shared Preferences
     implementation ("androidx.security:security-crypto:1.1.0")
+
+    //JSON Handling
+    implementation("com.google.code.gson:gson:2.13.1")
 
 }

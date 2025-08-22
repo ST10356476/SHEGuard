@@ -1,6 +1,7 @@
 package com.iiest10356476.sheguard.ui
 
 import android.Manifest
+import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -11,13 +12,20 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.iiest10356476.sheguard.R
 import com.iiest10356476.sheguard.data.repository.VaultRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 
 class SecureVault : AppCompatActivity() {
+
+    private val vaultRepo = VaultRepository()
+    private val selectedUris = mutableListOf<Uri>()
+    private val recentFilesRecyclerView by lazy { findViewById<RecyclerView>(R.id.recent_files_recycler_view) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,14 +38,21 @@ class SecureVault : AppCompatActivity() {
             insets
         }
 
+        val viewAllButton = findViewById<Button>(R.id.view_all_button)
+        viewAllButton.setOnClickListener {
+            val intent = Intent(this, SecureVaultViewAll::class.java)
+            startActivity(intent)
+        }
+
+
         val uploadButton = findViewById<Button>(R.id.upload_button)
         uploadButton.setOnClickListener {
             checkPermissionsAndPickFiles()
         }
-    }
 
-    private val vaultRepo = VaultRepository()
-    private val selectedUris = mutableListOf<Uri>()
+        // Setup RecyclerView
+        recentFilesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+    }
 
     // Permission launcher
     private val requestStoragePermission =
@@ -57,7 +72,6 @@ class SecureVault : AppCompatActivity() {
             }
         }
 
-
     private fun checkPermissionsAndPickFiles() {
         val permissions = mutableListOf<String>()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -75,14 +89,16 @@ class SecureVault : AppCompatActivity() {
     }
 
     private fun uploadSelectedFiles() {
-        val photoStrings = selectedUris.map { it.toString() }
+        val photoUris = selectedUris.filter { uri -> contentResolver.getType(uri)?.startsWith("image/") == true }
+        val videoUris = selectedUris.filter { uri -> contentResolver.getType(uri)?.startsWith("video/") == true }
+        val audioUris = selectedUris.filter { uri -> contentResolver.getType(uri)?.startsWith("audio/") == true }
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 vaultRepo.uploadVault(
-                    photos = photoStrings,
-                    videos = listOf(),
-                    audios = listOf()
+                    photos = photoUris,
+                    videos = videoUris,
+                    audios = audioUris
                 )
                 runOnUiThread {
                     Toast.makeText(this@SecureVault, "Upload successful!", Toast.LENGTH_SHORT).show()
@@ -94,4 +110,5 @@ class SecureVault : AppCompatActivity() {
             }
         }
     }
+
 }
