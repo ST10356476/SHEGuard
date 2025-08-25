@@ -13,7 +13,7 @@ cameraVideo = "1.4.2"
 lifecycleService = "2.9.2"
 cameraLifecycle = "1.4.2"
 firebaseStorageKtx = "22.0.0"
-recyclerview = "1.3.1"
+recyclerview = "1.4.0"
 playServicesMaps = "19.2.0"
 
 [libraries]

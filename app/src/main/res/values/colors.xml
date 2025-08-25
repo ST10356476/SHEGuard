@@ -14,4 +14,10 @@
     <color name="bottom_nav_icon_unselected">#9E9E9E</color>
     <color name="bottom_nav_text_selected">#6A1B9A</color>
     <color name="bottom_nav_text_unselected">#757575</color>
+
+    <color name="filter_text_color">#E1BEE7</color>
+    <color name="purple_primary">#6A1B9A</color>
+    <color name="purple_light">#E1BEE7</color>
+    <color name="gold">#FFD700</color>
+    <color name="orange_accent">#FF7043</color>
 </resources>
