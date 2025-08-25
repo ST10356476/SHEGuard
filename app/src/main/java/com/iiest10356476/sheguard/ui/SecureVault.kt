@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -15,33 +16,37 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 import com.iiest10356476.sheguard.R
 import com.iiest10356476.sheguard.data.models.FileType
 import com.iiest10356476.sheguard.data.models.Vault
 import com.iiest10356476.sheguard.data.repository.VaultRepository
-import kotlinx.coroutines.CoroutineScope
+
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
 import kotlinx.coroutines.withContext
-import com.google.firebase.firestore.FirebaseFirestore
-
 import kotlinx.coroutines.tasks.await
 
 class SecureVault : AppCompatActivity() {
 
+    companion object {
+        private const val TAG = "SecureVault"
+    }
 
-    private val vaultRepo = VaultRepository() // Using your current constructor
+    private val vaultRepo = VaultRepository()
     private val selectedUris = mutableListOf<Uri>()
+
+    // UI Components
     private lateinit var recentFilesRecyclerView: RecyclerView
     private lateinit var recentFilesAdapter: RecentFilesAdapter
 
-    // UI Elements for file counts
+    // File count TextViews
     private lateinit var totalFilesCount: TextView
     private lateinit var photosCount: TextView
     private lateinit var videosCount: TextView
@@ -54,106 +59,425 @@ class SecureVault : AppCompatActivity() {
 
     private var vaultItems: List<Vault> = emptyList()
 
+    // Permission launcher
+    private val requestStoragePermission =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            val allGranted = permissions.entries.all { it.value }
+            if (allGranted) {
+                Log.d(TAG, "Storage permissions granted")
+                openFilePicker()
+            } else {
+                Log.w(TAG, "Storage permissions denied")
+                Toast.makeText(this, "Storage permission is required to access files", Toast.LENGTH_LONG).show()
+            }
+        }
+
+    // File picker launcher for all files
+    private val pickFilesLauncher =
+        registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris ->
+            handleSelectedFiles(uris, "general")
+        }
+
+    // File picker launcher for specific file types
+    private val pickSpecificFilesLauncher =
+        registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris ->
+            handleSelectedFiles(uris, "specific")
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_secure_vault)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        // Set up back button
+        val backButton = findViewById<ImageButton>(R.id.back_button)
+        backButton.setOnClickListener {
+            finish()
         }
 
-
+        setupWindowInsets()
         initializeViews()
         setupClickListeners()
         setupRecyclerView()
         loadVaultData()
     }
 
+    private fun setupWindowInsets() {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { view, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            view.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
+    }
+
     private fun initializeViews() {
-        recentFilesRecyclerView = findViewById(R.id.recent_files_recycler_view)
+        try {
+            recentFilesRecyclerView = findViewById(R.id.recent_files_recycler_view)
 
-        // File count TextViews
-        totalFilesCount = findViewById(R.id.total_files_count)
-        photosCount = findViewById(R.id.photos_count)
-        videosCount = findViewById(R.id.videos_count)
-        othersCount = findViewById(R.id.others_count)
-        photosFilesCount = findViewById(R.id.photos_files_count)
-        videosFilesCount = findViewById(R.id.videos_files_count)
-        audioFilesCount = findViewById(R.id.audio_files_count)
-        documentsFilesCount = findViewById(R.id.documents_files_count)
+            // File count TextViews
+            totalFilesCount = findViewById(R.id.total_files_count)
+            photosCount = findViewById(R.id.photos_count)
+            videosCount = findViewById(R.id.videos_count)
+            othersCount = findViewById(R.id.others_count)
+            photosFilesCount = findViewById(R.id.photos_files_count)
+            videosFilesCount = findViewById(R.id.videos_files_count)
+            audioFilesCount = findViewById(R.id.audio_files_count)
+            documentsFilesCount = findViewById(R.id.documents_files_count)
 
-        Log.d("SecureVault", "All views initialized successfully")
+            Log.d(TAG, "All views initialized successfully")
+        } catch (e: Exception) {
+            Log.e(TAG, "Error initializing views", e)
+            Toast.makeText(this, "Error initializing interface", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun setupClickListeners() {
+        // Main action buttons
         findViewById<Button>(R.id.view_all_button).setOnClickListener {
-
-        val viewAllButton = findViewById<Button>(R.id.view_all_button)
-        viewAllButton.setOnClickListener {
-
-            val intent = Intent(this, SecureVaultViewAll::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, SecureVaultViewAll::class.java))
         }
-
 
         findViewById<Button>(R.id.upload_button).setOnClickListener {
             checkPermissionsAndPickFiles()
         }
 
-        // ADD DEBUG FUNCTION - Long press upload button to debug
+        // Debug functions (for development)
         findViewById<Button>(R.id.upload_button).setOnLongClickListener {
             debugFirebaseData()
             true
         }
 
-        // ADD TEST FUNCTION - Long press view all button to create test data
         findViewById<Button>(R.id.view_all_button).setOnLongClickListener {
-            testSimpleUpload()
+            createTestData()
             true
         }
 
-        // Individual file type buttons
+        // File type specific buttons
+        setupFileTypeButtons()
+    }
+
+    private fun setupFileTypeButtons() {
         findViewById<LinearLayout>(R.id.add_photos_button).setOnClickListener {
-            Log.d("SecureVault", "Photos button clicked")
+            Log.d(TAG, "Photos button clicked")
             pickSpecificFileType("image/*")
         }
 
         findViewById<LinearLayout>(R.id.add_videos_button).setOnClickListener {
-            Log.d("SecureVault", "Videos button clicked")
+            Log.d(TAG, "Videos button clicked")
             pickSpecificFileType("video/*")
         }
 
         findViewById<LinearLayout>(R.id.add_audio_button).setOnClickListener {
-            Log.d("SecureVault", "Audio button clicked")
+            Log.d(TAG, "Audio button clicked")
             pickSpecificFileType("audio/*")
         }
 
         findViewById<LinearLayout>(R.id.add_documents_button).setOnClickListener {
-            Log.d("SecureVault", "Documents button clicked")
-            // Multiple MIME types for documents
-            pickSpecificFileType("application/*,text/*")  // This allows PDFs, Word docs, text files, etc.
+            Log.d(TAG, "Documents button clicked")
+            pickSpecificFileType("application/*,text/*")
         }
     }
 
-    // DEBUG FUNCTION
+    private fun setupRecyclerView() {
+        recentFilesAdapter = RecentFilesAdapter(
+            onDeleteClick = { file ->
+                Log.d(TAG, "Delete clicked for file: ${file.url}")
+                deleteFile(file)
+            },
+            onDownloadClick = { file ->
+                Log.d(TAG, "Download clicked for file: ${file.url}")
+                downloadFile(file)
+            }
+        )
+
+        recentFilesRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this@SecureVault, LinearLayoutManager.HORIZONTAL, false)
+            adapter = recentFilesAdapter
+        }
+
+        Log.d(TAG, "RecyclerView setup completed")
+    }
+
+    private fun loadVaultData() {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        if (uid == null) {
+            Toast.makeText(this, "Please log in to view vault", Toast.LENGTH_SHORT).show()
+            Log.e(TAG, "No authenticated user found")
+            return
+        }
+
+        Log.d(TAG, "Loading vault data for user: $uid")
+
+        lifecycleScope.launch {
+            try {
+                vaultItems = withContext(Dispatchers.IO) {
+                    vaultRepo.getRecentVaultItems(uid)
+                }
+
+                Log.d(TAG, "Loaded ${vaultItems.size} vault items")
+                updateUI()
+                updateRecentFiles()
+
+            } catch (e: Exception) {
+                Log.e(TAG, "Error loading vault data", e)
+                Toast.makeText(this@SecureVault, "Failed to load vault data", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun updateUI() {
+        val allFiles = vaultItems.flatMap { it.files }
+        val filesByType = categorizeFiles(allFiles)
+
+        Log.d(TAG, "File counts - Total: ${allFiles.size}, " +
+                "Photos: ${filesByType.photos.size}, " +
+                "Videos: ${filesByType.videos.size}, " +
+                "Audio: ${filesByType.audio.size}, " +
+                "Documents: ${filesByType.documents.size}")
+
+        // Update UI counters
+        with(filesByType) {
+            totalFilesCount.text = allFiles.size.toString()
+            photosCount.text = photos.size.toString()
+            videosCount.text = videos.size.toString()
+            othersCount.text = (audio.size + documents.size + others.size).toString()
+
+            photosFilesCount.text = "${photos.size} files"
+            videosFilesCount.text = "${videos.size} files"
+            audioFilesCount.text = "${audio.size} files"
+            documentsFilesCount.text = "${documents.size} files"
+        }
+
+        Log.d(TAG, "UI counters updated successfully")
+    }
+
+    private fun categorizeFiles(files: List<com.iiest10356476.sheguard.data.models.VaultFile>): CategorizedFiles {
+        val photos = files.filter { it.type == FileType.PHOTO }
+        val videos = files.filter { it.type == FileType.VIDEO }
+        val audio = files.filter { it.type == FileType.AUDIO }
+        val documents = files.filter { it.type == FileType.DOCUMENTS }
+        val others = files - photos - videos - audio - documents
+
+        return CategorizedFiles(photos, videos, audio, documents, others)
+    }
+
+    private data class CategorizedFiles(
+        val photos: List<com.iiest10356476.sheguard.data.models.VaultFile>,
+        val videos: List<com.iiest10356476.sheguard.data.models.VaultFile>,
+        val audio: List<com.iiest10356476.sheguard.data.models.VaultFile>,
+        val documents: List<com.iiest10356476.sheguard.data.models.VaultFile>,
+        val others: List<com.iiest10356476.sheguard.data.models.VaultFile>
+    )
+
+    private fun updateRecentFiles() {
+        val recentFiles = vaultItems
+            .sortedByDescending { it.submitDate }
+            .take(5)
+            .flatMap { vault ->
+                vault.files.map { file ->
+                    RecentFileItem(file, vault.submitDate)
+                }
+            }
+            .take(10)
+
+        Log.d(TAG, "Recent files count: ${recentFiles.size}")
+        recentFilesAdapter.updateFiles(recentFiles)
+    }
+
+    private fun handleSelectedFiles(uris: List<Uri>?, type: String) {
+        if (uris.isNullOrEmpty()) {
+            Log.d(TAG, "No files selected")
+            return
+        }
+
+        Log.d(TAG, "Selected ${uris.size} $type files for upload")
+
+        when (type) {
+            "general" -> {
+                selectedUris.clear()
+                selectedUris.addAll(uris)
+                uploadSelectedFiles()
+            }
+            "specific" -> uploadSpecificFiles(uris)
+        }
+    }
+
+    private fun checkPermissionsAndPickFiles() {
+        val permissions = getRequiredPermissions()
+        Log.d(TAG, "Requesting permissions: $permissions")
+        requestStoragePermission.launch(permissions.toTypedArray())
+    }
+
+    private fun getRequiredPermissions(): List<String> {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            listOf(
+                Manifest.permission.READ_MEDIA_IMAGES,
+                Manifest.permission.READ_MEDIA_VIDEO,
+                Manifest.permission.READ_MEDIA_AUDIO
+            )
+        } else {
+            listOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+        }
+    }
+
+    private fun openFilePicker() {
+        Log.d(TAG, "Opening general file picker")
+        pickFilesLauncher.launch("*/*")
+    }
+
+    private fun pickSpecificFileType(mimeType: String) {
+        Log.d(TAG, "Opening specific file picker for: $mimeType")
+        pickSpecificFilesLauncher.launch(mimeType)
+    }
+
+    private fun uploadSelectedFiles() {
+        if (selectedUris.isEmpty()) {
+            Log.w(TAG, "No files to upload")
+            return
+        }
+
+        val categorizedUris = categorizeUrisByMimeType(selectedUris)
+        Log.d(TAG, "Categorized files - Photos: ${categorizedUris.photos.size}, " +
+                "Videos: ${categorizedUris.videos.size}, Audio: ${categorizedUris.audio.size}, " +
+                "Documents: ${categorizedUris.documents.size}")
+
+        uploadFiles(categorizedUris)
+    }
+
+    private fun uploadSpecificFiles(uris: List<Uri>) {
+        val categorizedUris = categorizeUrisByMimeType(uris)
+        Log.d(TAG, "Specific files categorized - Photos: ${categorizedUris.photos.size}, " +
+                "Videos: ${categorizedUris.videos.size}, Audio: ${categorizedUris.audio.size}, " +
+                "Documents: ${categorizedUris.documents.size}")
+
+        uploadFiles(categorizedUris)
+    }
+
+    private fun categorizeUrisByMimeType(uris: List<Uri>): CategorizedUris {
+        val photos = mutableListOf<Uri>()
+        val videos = mutableListOf<Uri>()
+        val audio = mutableListOf<Uri>()
+        val documents = mutableListOf<Uri>()
+
+        uris.forEach { uri ->
+            val mimeType = contentResolver.getType(uri)
+            Log.d(TAG, "File URI: $uri, MIME type: $mimeType")
+
+            when {
+                mimeType?.startsWith("image/") == true -> photos.add(uri)
+                mimeType?.startsWith("video/") == true -> videos.add(uri)
+                mimeType?.startsWith("audio/") == true -> audio.add(uri)
+                mimeType?.startsWith("application/") == true ||
+                        mimeType?.startsWith("text/") == true -> documents.add(uri)
+                else -> documents.add(uri) // Default to documents for unknown files
+            }
+        }
+
+        return CategorizedUris(photos, videos, audio, documents)
+    }
+
+    private data class CategorizedUris(
+        val photos: List<Uri>,
+        val videos: List<Uri>,
+        val audio: List<Uri>,
+        val documents: List<Uri>
+    )
+
+    private fun uploadFiles(categorizedUris: CategorizedUris) {
+        val totalFiles = with(categorizedUris) {
+            photos.size + videos.size + audio.size + documents.size
+        }
+
+        if (totalFiles == 0) {
+            Toast.makeText(this, "No files selected", Toast.LENGTH_SHORT).show()
+            Log.w(TAG, "No files to upload after categorization")
+            return
+        }
+
+        Toast.makeText(this, "Uploading $totalFiles files...", Toast.LENGTH_SHORT).show()
+        Log.d(TAG, "Starting upload of $totalFiles files")
+
+        lifecycleScope.launch {
+            try {
+                val result = withContext(Dispatchers.IO) {
+                    vaultRepo.uploadVault(
+                        photos = categorizedUris.photos,
+                        videos = categorizedUris.videos,
+                        audios = categorizedUris.audio,
+                        documents = categorizedUris.documents
+                    )
+                }
+
+                // Handle upload result
+                result.fold(
+                    onSuccess = { vault ->
+                        Toast.makeText(this@SecureVault, "Upload successful!", Toast.LENGTH_SHORT).show()
+                        Log.d(TAG, "Upload completed successfully: ${vault.vaultId}")
+                        loadVaultData() // Refresh data
+                    },
+                    onFailure = { exception ->
+                        val errorMessage = exception.message ?: "Unknown error occurred"
+                        Toast.makeText(this@SecureVault, "Upload failed: $errorMessage", Toast.LENGTH_LONG).show()
+                        Log.e(TAG, "Upload failed", exception)
+                    }
+                )
+            } catch (e: Exception) {
+                Log.e(TAG, "Error uploading files", e)
+                Toast.makeText(this@SecureVault, "Upload failed: ${e.message}", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    private fun deleteFile(file: com.iiest10356476.sheguard.data.models.VaultFile) {
+        lifecycleScope.launch {
+            try {
+                withContext(Dispatchers.IO) {
+                    vaultRepo.deleteFile(file)
+                }
+                Toast.makeText(this@SecureVault, "File deleted successfully", Toast.LENGTH_SHORT).show()
+                Log.d(TAG, "File deleted successfully: ${file.url}")
+                loadVaultData() // Refresh data
+            } catch (e: Exception) {
+                Log.e(TAG, "Error deleting file", e)
+                Toast.makeText(this@SecureVault, "Failed to delete file", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun downloadFile(file: com.iiest10356476.sheguard.data.models.VaultFile) {
+        Log.d(TAG, "Attempting to download file: ${file.url}")
+
+        vaultRepo.getDownloadUrl(file) { url ->
+            runOnUiThread {
+                if (url != null) {
+                    Log.d(TAG, "Got download URL: $url")
+                    try {
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                        startActivity(intent)
+                    } catch (e: Exception) {
+                        Toast.makeText(this@SecureVault, "Cannot open file", Toast.LENGTH_SHORT).show()
+                        Log.e(TAG, "Cannot open file", e)
+                    }
+                } else {
+                    Toast.makeText(this@SecureVault, "Cannot get download URL", Toast.LENGTH_SHORT).show()
+                    Log.e(TAG, "Cannot get download URL for file: ${file.url}")
+                }
+            }
+        }
+    }
+
+    // Debug function for development
     private fun debugFirebaseData() {
         val uid = FirebaseAuth.getInstance().currentUser?.uid
         if (uid == null) {
-            Log.e("DEBUG", "No authenticated user")
             Toast.makeText(this, "No user authenticated", Toast.LENGTH_SHORT).show()
             return
         }
 
-        Log.d("DEBUG", "Current user: $uid")
-        Toast.makeText(this, "Checking Firebase data...", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Debugging Firebase data...", Toast.LENGTH_SHORT).show()
 
-        CoroutineScope(Dispatchers.Main).launch {
+        lifecycleScope.launch {
             try {
-                // Debug Firestore directly
                 val firestore = FirebaseFirestore.getInstance()
                 val snapshot = withContext(Dispatchers.IO) {
                     firestore.collection("Vault")
@@ -162,49 +486,10 @@ class SecureVault : AppCompatActivity() {
                         .await()
                 }
 
-                Log.d("DEBUG", "📊 Firestore query returned ${snapshot.documents.size} documents")
+                Log.d(TAG, "Debug: Firestore returned ${snapshot.documents.size} documents")
 
-                if (snapshot.documents.isEmpty()) {
-                    Log.w("DEBUG", "⚠️ No documents found for user $uid")
-                    Toast.makeText(this@SecureVault, "No vault data found in Firestore", Toast.LENGTH_LONG).show()
-
-                    // Check if any documents exist at all
-                    val allDocs = withContext(Dispatchers.IO) {
-                        firestore.collection("Vault").limit(5).get().await()
-                    }
-                    Log.d("DEBUG", "📋 Total documents in Vault collection: ${allDocs.documents.size}")
-
-                    return@launch
-                }
-
-                // Parse each document
-                snapshot.documents.forEachIndexed { index, document ->
-                    Log.d("DEBUG", "📄 Document $index:")
-                    Log.d("DEBUG", "  - ID: ${document.id}")
-                    Log.d("DEBUG", "  - UID: ${document.getString("uid")}")
-                    Log.d("DEBUG", "  - VaultID: ${document.getString("vaultId")}")
-                    Log.d("DEBUG", "  - SubmitDate: ${document.getLong("submitDate")}")
-
-                    val filesArray = document.get("files") as? List<*>
-                    Log.d("DEBUG", "  - Files array size: ${filesArray?.size ?: 0}")
-
-                    filesArray?.forEachIndexed { fileIndex, fileData ->
-                        if (fileData is Map<*, *>) {
-                            val url = fileData["url"] as? String
-                            val type = fileData["type"] as? String
-                            Log.d("DEBUG", "    File $fileIndex: URL=$url, Type=$type")
-                        }
-                    }
-                }
-
-                // Try to use VaultRepository
                 val vaultItems = withContext(Dispatchers.IO) {
                     vaultRepo.getRecentVaultItems(uid)
-                }
-
-                Log.d("DEBUG", "🔄 VaultRepository returned ${vaultItems.size} items")
-                vaultItems.forEachIndexed { index, vault ->
-                    Log.d("DEBUG", "  Vault $index: ${vault.vaultId} with ${vault.files.size} files")
                 }
 
                 Toast.makeText(this@SecureVault,
@@ -212,25 +497,24 @@ class SecureVault : AppCompatActivity() {
                     Toast.LENGTH_LONG).show()
 
             } catch (e: Exception) {
-                Log.e("DEBUG", "Error debugging Firebase data", e)
-                Toast.makeText(this@SecureVault, "Debug error: ${e.message}", Toast.LENGTH_LONG).show()
+                Log.e(TAG, "Debug error", e)
+                Toast.makeText(this@SecureVault, "Debug failed: ${e.message}", Toast.LENGTH_LONG).show()
             }
         }
     }
 
-    // TEST FUNCTION - Add this to create test data
-    private fun testSimpleUpload() {
-        Toast.makeText(this, "Testing simple upload...", Toast.LENGTH_SHORT).show()
+    // Test function for development
+    private fun createTestData() {
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser == null) {
+            Toast.makeText(this, "No authenticated user", Toast.LENGTH_SHORT).show()
+            return
+        }
 
-        CoroutineScope(Dispatchers.Main).launch {
+        Toast.makeText(this, "Creating test data...", Toast.LENGTH_SHORT).show()
+
+        lifecycleScope.launch {
             try {
-                val currentUser = FirebaseAuth.getInstance().currentUser
-                if (currentUser == null) {
-                    Toast.makeText(this@SecureVault, "No authenticated user", Toast.LENGTH_SHORT).show()
-                    return@launch
-                }
-
-                // Create a simple test vault directly
                 val firestore = FirebaseFirestore.getInstance()
                 val testVault = hashMapOf(
                     "vaultId" to "test-${System.currentTimeMillis()}",
@@ -251,323 +535,20 @@ class SecureVault : AppCompatActivity() {
                         .await()
                 }
 
-                Toast.makeText(this@SecureVault, "Test vault created! Now refresh...", Toast.LENGTH_SHORT).show()
-
-                // Wait a moment then reload data
+                Toast.makeText(this@SecureVault, "Test data created!", Toast.LENGTH_SHORT).show()
                 kotlinx.coroutines.delay(1000)
                 loadVaultData()
 
             } catch (e: Exception) {
-                Log.e("DEBUG", "Error creating test vault", e)
+                Log.e(TAG, "Error creating test data", e)
                 Toast.makeText(this@SecureVault, "Test failed: ${e.message}", Toast.LENGTH_LONG).show()
             }
         }
     }
 
-    private fun setupRecyclerView() {
-        recentFilesAdapter = RecentFilesAdapter(
-            onDeleteClick = { file ->
-                Log.d("SecureVault", "Delete clicked for file: ${file.url}")
-                deleteFile(file)
-            },
-            onDownloadClick = { file ->
-                Log.d("SecureVault", "Download clicked for file: ${file.url}")
-                downloadFile(file)
-            }
-        )
-        recentFilesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        recentFilesRecyclerView.adapter = recentFilesAdapter
-        Log.d("SecureVault", "RecyclerView setup completed")
-    }
-
-    private fun loadVaultData() {
-        val uid = FirebaseAuth.getInstance().currentUser?.uid
-        if (uid == null) {
-            Toast.makeText(this, "Please log in to view vault", Toast.LENGTH_SHORT).show()
-            Log.e("SecureVault", "No authenticated user found")
-            return
-        }
-
-        Log.d("SecureVault", "Loading vault data for user: $uid")
-
-        CoroutineScope(Dispatchers.Main).launch {
-            try {
-                vaultItems = withContext(Dispatchers.IO) {
-                    vaultRepo.getRecentVaultItems(uid)
-                }
-
-                Log.d("SecureVault", "Loaded ${vaultItems.size} vault items")
-                vaultItems.forEach { vault ->
-                    Log.d("SecureVault", "Vault ${vault.vaultId} has ${vault.files.size} files")
-                }
-
-                updateUI()
-                updateRecentFiles()
-
-            } catch (e: Exception) {
-                Log.e("SecureVault", "Error loading vault data", e)
-                Toast.makeText(this@SecureVault, "Error loading vault data: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private fun updateUI() {
-        val allFiles = vaultItems.flatMap { it.files }
-        val photoFiles = allFiles.filter { it.type == FileType.PHOTO }
-        val videoFiles = allFiles.filter { it.type == FileType.VIDEO }
-        val audioFiles = allFiles.filter { it.type == FileType.AUDIO }
-        val documentFiles = allFiles.filter { it.type == FileType.DOCUMENTS }
-        val otherFiles = allFiles - photoFiles - videoFiles - audioFiles - documentFiles
-
-        Log.d("SecureVault", "File counts - Total: ${allFiles.size}, Photos: ${photoFiles.size}, Videos: ${videoFiles.size}, Audio: ${audioFiles.size}, Documents: ${documentFiles.size}, Others: ${otherFiles.size}")
-
-        // Update counters
-        totalFilesCount.text = allFiles.size.toString()
-        photosCount.text = photoFiles.size.toString()
-        videosCount.text = videoFiles.size.toString()
-        othersCount.text = (audioFiles.size + documentFiles.size + otherFiles.size).toString()
-
-        photosFilesCount.text = "${photoFiles.size} files"
-        videosFilesCount.text = "${videoFiles.size} files"
-        audioFilesCount.text = "${audioFiles.size} files"
-        documentsFilesCount.text = "${documentFiles.size} files"
-
-        Log.d("SecureVault", "UI counters updated successfully")
-    }
-
-    private fun updateRecentFiles() {
-        val recentFiles = vaultItems
-            .sortedByDescending { it.submitDate }
-            .take(5)
-            .flatMap { vault ->
-                vault.files.map { file ->
-                    RecentFileItem(file, vault.submitDate)
-                }
-            }
-            .take(10)
-
-        Log.d("SecureVault", "Recent files count: ${recentFiles.size}")
-        recentFiles.forEach { item ->
-            Log.d("SecureVault", "Recent file: ${item.file.type} - ${item.file.url}")
-        }
-
-        recentFilesAdapter.updateFiles(recentFiles)
-    }
-
-    private fun deleteFile(file: com.iiest10356476.sheguard.data.models.VaultFile) {
-        CoroutineScope(Dispatchers.Main).launch {
-            try {
-                withContext(Dispatchers.IO) {
-                    vaultRepo.deleteFile(file)
-                }
-                Toast.makeText(this@SecureVault, "File deleted successfully", Toast.LENGTH_SHORT).show()
-                Log.d("SecureVault", "File deleted successfully: ${file.url}")
-                loadVaultData() // Refresh data
-            } catch (e: Exception) {
-                Log.e("SecureVault", "Error deleting file", e)
-                Toast.makeText(this@SecureVault, "Error deleting file: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private fun downloadFile(file: com.iiest10356476.sheguard.data.models.VaultFile) {
-        Log.d("SecureVault", "Attempting to download file: ${file.url}")
-        vaultRepo.getDownloadUrl(file) { url ->
-            runOnUiThread {
-                if (url != null) {
-                    Log.d("SecureVault", "Got download URL: $url")
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                    try {
-                        startActivity(intent)
-                    } catch (e: Exception) {
-                        Toast.makeText(this, "Cannot open file", Toast.LENGTH_SHORT).show()
-                        Log.e("SecureVault", "Cannot open file", e)
-                    }
-                } else {
-                    Toast.makeText(this, "Cannot get download URL", Toast.LENGTH_SHORT).show()
-                    Log.e("SecureVault", "Cannot get download URL for file: ${file.url}")
-                }
-            }
-        }
-
-
-        val uploadButton = findViewById<Button>(R.id.upload_button)
-        uploadButton.setOnClickListener {
-            checkPermissionsAndPickFiles()
-        }
-
-        // Setup RecyclerView
-        recentFilesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-    }
-
-    // Permission launcher
-    private val requestStoragePermission =
-        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { perms ->
-            val granted = perms.entries.all { it.value }
-            if (granted) {
-                Log.d("SecureVault", "Storage permissions granted")
-                openFilePicker()
-            } else {
-                Log.w("SecureVault", "Storage permissions denied")
-                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-    // File picker launcher for all files
-    private val pickFilesLauncher =
-        registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris ->
-            if (!uris.isNullOrEmpty()) {
-                Log.d("SecureVault", "Selected ${uris.size} files for upload")
-                selectedUris.clear()
-                selectedUris.addAll(uris)
-                uploadSelectedFiles()
-            } else {
-                Log.d("SecureVault", "No files selected")
-            }
-        }
-
-
-    // File picker launcher for specific file types
-    private val pickSpecificFilesLauncher =
-        registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris ->
-            if (!uris.isNullOrEmpty()) {
-                Log.d("SecureVault", "Selected ${uris.size} specific files for upload")
-                uploadSpecificFiles(uris)
-            } else {
-                Log.d("SecureVault", "No specific files selected")
-            }
-        }
-
-
-    private fun checkPermissionsAndPickFiles() {
-        val permissions = mutableListOf<String>()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            permissions.add(Manifest.permission.READ_MEDIA_IMAGES)
-            permissions.add(Manifest.permission.READ_MEDIA_VIDEO)
-            permissions.add(Manifest.permission.READ_MEDIA_AUDIO)
-        } else {
-            permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE)
-        }
-        Log.d("SecureVault", "Requesting permissions: $permissions")
-        requestStoragePermission.launch(permissions.toTypedArray())
-    }
-
-    private fun openFilePicker() {
-        Log.d("SecureVault", "Opening general file picker")
-        pickFilesLauncher.launch("*/*")
-    }
-
-    private fun pickSpecificFileType(mimeType: String) {
-        Log.d("SecureVault", "Opening specific file picker for: $mimeType")
-        pickSpecificFilesLauncher.launch(mimeType)
-    }
-
-    private fun uploadSelectedFiles() {
-
-        if (selectedUris.isEmpty()) {
-            Log.w("SecureVault", "No files to upload")
-            return
-        }
-
-        val photoUris = selectedUris.filter { uri ->
-            contentResolver.getType(uri)?.startsWith("image/") == true
-        }
-        val videoUris = selectedUris.filter { uri ->
-            contentResolver.getType(uri)?.startsWith("video/") == true
-        }
-        val audioUris = selectedUris.filter { uri ->
-            contentResolver.getType(uri)?.startsWith("audio/") == true
-        }
-
-        val documentUris = selectedUris.filter { uri ->
-            contentResolver.getType(uri)?.startsWith("documents/") == true
-        }
-
-
-        Log.d("SecureVault", "Categorized files - Photos: ${photoUris.size}, Videos: ${videoUris.size}, Audio: ${audioUris.size}")
-        uploadFiles(photoUris, videoUris, audioUris, documentUris)
-    }
-
-    private fun uploadSpecificFiles(uris: List<Uri>) {
-        val photoUris = mutableListOf<Uri>()
-        val videoUris = mutableListOf<Uri>()
-        val audioUris = mutableListOf<Uri>()
-        val documentUris = mutableListOf<Uri>()
-
-        uris.forEach { uri ->
-            val mimeType = contentResolver.getType(uri)
-            Log.d("SecureVault", "File URI: $uri, MIME type: $mimeType")
-            when {
-                mimeType?.startsWith("image/") == true -> photoUris.add(uri)
-                mimeType?.startsWith("video/") == true -> videoUris.add(uri)
-                mimeType?.startsWith("audio/") == true -> audioUris.add(uri)
-                mimeType?.startsWith("application/") == true -> documentUris.add(uri)
-                mimeType?.startsWith("text/") == true -> documentUris.add(uri)
-                mimeType == "application/pdf" -> documentUris.add(uri)
-                mimeType == "application/msword" -> documentUris.add(uri)
-                mimeType == "application/vnd.openxmlformats-officedocument.wordprocessingml.document" -> documentUris.add(uri)
-                mimeType == "application/vnd.ms-excel" -> documentUris.add(uri)
-                mimeType == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" -> documentUris.add(uri)
-                else -> documentUris.add(uri) // Default to documents for unknown files
-            }
-        }
-
-        Log.d("SecureVault", "Specific files categorized - Photos: ${photoUris.size}, Videos: ${videoUris.size}, Audio: ${audioUris.size}, Documents: ${documentUris.size}")
-        uploadFiles(photoUris, videoUris, audioUris, documentUris)
-    }
-
-    private fun uploadFiles(photoUris: List<Uri>, videoUris: List<Uri>, audioUris: List<Uri>, documentUris: List<Uri>) {
-        if (photoUris.isEmpty() && videoUris.isEmpty() && audioUris.isEmpty() && documentUris.isEmpty()) {
-            Toast.makeText(this, "No files selected", Toast.LENGTH_SHORT).show()
-            Log.w("SecureVault", "No files to upload after categorization")
-            return
-        }
-
-        val totalFiles = photoUris.size + videoUris.size + audioUris.size + documentUris.size
-        Toast.makeText(this, "Uploading $totalFiles files...", Toast.LENGTH_SHORT).show()
-        Log.d("SecureVault", "Starting upload of $totalFiles files")
-
-        CoroutineScope(Dispatchers.Main).launch {
-            try {
-
-                val result = withContext(Dispatchers.IO) {
-                    vaultRepo.uploadVault(
-                        photos = photoUris,
-                        videos = videoUris,
-                        audios = audioUris,
-                        documents = documentUris
-                    )
-
-                runOnUiThread {
-                    Toast.makeText(this@SecureVault, "Upload successful!", Toast.LENGTH_SHORT).show()
-
-                }
-
-                // Handle Result type properly
-                result.fold(
-                    onSuccess = { vault ->
-                        Toast.makeText(this@SecureVault, "Upload successful!", Toast.LENGTH_SHORT).show()
-                        Log.d("SecureVault", "Upload completed successfully")
-                        loadVaultData() // Refresh data to show new files
-                    },
-                    onFailure = { exception ->
-                        val errorMessage = exception.message ?: "Unknown error"
-                        Toast.makeText(this@SecureVault, "Upload failed: $errorMessage", Toast.LENGTH_LONG).show()
-                        Log.e("SecureVault", "Upload failed", exception)
-                    }
-                )
-            } catch (e: Exception) {
-                Log.e("SecureVault", "Error uploading files", e)
-                Toast.makeText(this@SecureVault, "Upload failed: ${e.message}", Toast.LENGTH_LONG).show()
-            }
-        }
-    }
-
-
     override fun onResume() {
         super.onResume()
-        Log.d("SecureVault", "Activity resumed, refreshing data")
-        loadVaultData() // Refresh data when returning to activity
+        Log.d(TAG, "Activity resumed, refreshing data")
+        loadVaultData()
     }
 }
-

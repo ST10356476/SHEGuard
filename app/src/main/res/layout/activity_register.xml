@@ -176,12 +176,12 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/ic_launcher_background"
             android:text="@string/sign_up"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
             android:textAllCaps="false"
-            android:background="@drawable/purple_button_background" />
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
 
         <LinearLayout
@@ -200,7 +200,7 @@
             <TextView
                 android:id="@+id/sign_in_link"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:text="@string/sign_in"
                 android:textSize="14sp"
                 android:textColor="#6A1B9A"

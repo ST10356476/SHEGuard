@@ -209,7 +209,7 @@
             android:textStyle="bold"
             android:textColor="#6A1B9A"
             android:textAllCaps="false"
-            android:background="@drawable/button_background"
+            android:background="@drawable/logo_background"
             android:elevation="6dp"
             style="@style/Widget.AppCompat.Button.Borderless" />
 

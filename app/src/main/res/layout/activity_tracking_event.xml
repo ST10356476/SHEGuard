@@ -81,7 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/track_section_background"
+                android:background="@drawable/purple_gradient_background"
                 android:orientation="vertical"
                 android:gravity="center_horizontal"
                 android:padding="32dp"
@@ -92,7 +92,7 @@
                     android:id="@+id/livetrack_button"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
-                    android:background="@drawable/button_background"
+                    android:background="@drawable/logo_background"
                     android:orientation="vertical"
                     android:gravity="center">
 
@@ -210,10 +210,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/bottom_nav_background"
+        android:background="@drawable/logo_background"
         app:elevation="8dp"
         app:itemIconSize="24dp"
-        app:itemIconTint="@null"
         app:itemTextColor="@color/bottom_nav_text_colors"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_navigation_menu" />

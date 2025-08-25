@@ -83,7 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/light_purple_box_background"
+                android:background="@drawable/purple_gradient_background"
                 android:padding="20dp"
                 android:layout_marginBottom="24dp">
 
@@ -257,7 +257,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/light_purple_box_background"
+                android:background="@drawable/purple_gradient_background"
                 android:padding="20dp"
                 android:layout_marginBottom="24dp">
 
@@ -268,8 +268,8 @@
                     android:text="Upload to Vault"
                     android:layout_gravity="center_horizontal"
                     android:padding="12dp"
-                    android:backgroundTint="@color/black"
-                    android:textColor="@android:color/white"/>
+                    android:backgroundTint="@color/ic_launcher_background"
+                    android:textColor="@color/black"/>
 
 
                 <TextView
@@ -502,7 +502,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/light_purple_box_background"
+                android:background="@drawable/purple_gradient_background"
                 android:padding="20dp">
 
 
@@ -527,7 +527,7 @@
                         style="?android:attr/borderlessButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="32dp"
-                        android:background="@drawable/add_contact_button_background"
+                        android:background="@drawable/action_button_background"
                         android:minWidth="0dp"
                         android:paddingHorizontal="12dp"
                         android:clickable="true"

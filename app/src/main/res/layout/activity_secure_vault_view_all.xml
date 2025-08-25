@@ -96,7 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:layout_marginEnd="12dp"
-                    android:background="@drawable/filter_button_selected_background"
+                    android:background="@drawable/logo_background"
                     android:minWidth="0dp"
                     android:paddingHorizontal="16dp"
                     android:text="All (12)"
@@ -118,7 +118,7 @@
                     android:paddingHorizontal="16dp"
                     android:text=" Photos "
                     android:textAllCaps="false"
-                    android:textColor="#E1BEE7"
+                    android:textColor="@color/black"
                     android:textSize="12sp"
                     tools:ignore="TouchTargetSizeCheck" />
 
