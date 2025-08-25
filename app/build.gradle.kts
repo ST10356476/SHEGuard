@@ -77,6 +77,7 @@ dependencies {
     // Firebase Authentication
     implementation ("com.google.firebase:firebase-auth")
 
+
     // Firebase Firestore
     implementation ("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-storage-ktx:20.3.0")

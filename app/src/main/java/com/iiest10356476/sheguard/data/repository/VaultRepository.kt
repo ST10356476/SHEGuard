@@ -4,6 +4,7 @@ import android.net.Uri
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.storage.FirebaseStorage
 import com.iiest10356476.sheguard.data.models.FileType
 import com.iiest10356476.sheguard.data.models.Vault
@@ -20,14 +21,12 @@ class VaultRepository {
     private val vaultCollection = firestore.collection("Vault")
     private val TAG = "VaultRepository"
 
-    // Upload vault with photos/videos/audios
+    // Save individual vault file
+    suspend fun saveVaultFile(fileUrl: String, fileType: FileType): Result<Unit> {
+        return try {
+            val currentUser = auth.currentUser
+                ?: return Result.failure(Exception("No user signed in"))
 
-    // VaultRepository.kt
-    suspend fun saveVaultFile(fileUrl: String, fileType: FileType) {
-        try {
-            val currentUser = auth.currentUser ?: return
-
-            // Create a new VaultFile
             val vaultFile = VaultFile(fileUrl, fileType)
 
             // Check if user already has a vault
@@ -38,7 +37,7 @@ class VaultRepository {
                 // Append the new file to existing Vault
                 val updatedFiles = existingVault.files + vaultFile
                 vaultCollection.document(existingVault.vaultId).update("files", updatedFiles).await()
-                Log.d("VaultRepository", "Added file to existing vault: $fileUrl")
+                Log.d(TAG, "Added file to existing vault: $fileUrl")
             } else {
                 // Create a new Vault document
                 val vaultId = UUID.randomUUID().toString()
@@ -49,36 +48,70 @@ class VaultRepository {
                     uid = currentUser.uid
                 )
                 vaultCollection.document(vaultId).set(newVault).await()
-                Log.d("VaultRepository", "Created new vault with file: $fileUrl")
+                Log.d(TAG, "Created new vault with file: $fileUrl")
             }
 
+            Result.success(Unit)
         } catch (e: Exception) {
-            Log.e("VaultRepository", "Error saving vault file", e)
+            Log.e(TAG, "Error saving vault file", e)
+            Result.failure(e)
         }
     }
 
+    // Upload vault with multiple files
     suspend fun uploadVault(
         photos: List<Uri> = emptyList(),
         videos: List<Uri> = emptyList(),
-        audios: List<Uri> = emptyList()
+        audios: List<Uri> = emptyList(),
+        documents: List<Uri> = emptyList()
     ): Result<Vault> {
         return try {
-            val currentUser = auth.currentUser ?: return Result.failure(Exception("No user signed in"))
+            val currentUser = auth.currentUser
+                ?: return Result.failure(Exception("No user signed in"))
+
+            if (photos.isEmpty() && videos.isEmpty() && audios.isEmpty() && documents.isEmpty()) {
+                return Result.failure(Exception("No files to upload"))
+            }
 
             val vaultId = UUID.randomUUID().toString()
             val timestamp = System.currentTimeMillis()
 
-            val photoFiles = uploadFiles("photos", photos, currentUser.uid, vaultId).map { VaultFile(it, FileType.PHOTO) }
-            val videoFiles = uploadFiles("videos", videos, currentUser.uid, vaultId).map { VaultFile(it, FileType.VIDEO) }
-            val audioFiles = uploadFiles("audios", audios, currentUser.uid, vaultId).map { VaultFile(it, FileType.AUDIO) }
+            // Upload files and create VaultFile objects
+            val photoFiles = uploadFiles("photos", photos, currentUser.uid, vaultId)
+                .map { VaultFile(it, FileType.PHOTO) }
+            val videoFiles = uploadFiles("videos", videos, currentUser.uid, vaultId)
+                .map { VaultFile(it, FileType.VIDEO) }
+            val audioFiles = uploadFiles("audios", audios, currentUser.uid, vaultId)
+                .map { VaultFile(it, FileType.AUDIO) }
+            val documentsFiles = uploadFiles("documents", documents, currentUser.uid, vaultId)
+                .map { VaultFile(it, FileType.DOCUMENTS) }
 
-            val allFiles = photoFiles + videoFiles + audioFiles
+            val allFiles = photoFiles + videoFiles + audioFiles + documentsFiles
 
-            val vaultItem = Vault(vaultId, allFiles, timestamp, currentUser.uid)
-            vaultCollection.document(vaultId).set(vaultItem).await()
-            Log.d(TAG, "Vault item uploaded successfully!")
+            if (allFiles.isEmpty()) {
+                return Result.failure(Exception("Failed to upload any files"))
+            }
 
-            Result.success(vaultItem)
+            // Check if user already has a vault
+            val snapshot = vaultCollection.whereEqualTo("uid", currentUser.uid).get().await()
+            val existingVault = snapshot.documents.firstOrNull()?.toObject(Vault::class.java)
+
+            val resultVault = if (existingVault != null) {
+                // Append files to existing vault
+                val updatedFiles = existingVault.files + allFiles
+                val updatedVault = existingVault.copy(files = updatedFiles as List<VaultFile>, submitDate = timestamp)
+                vaultCollection.document(existingVault.vaultId).set(updatedVault).await()
+                Log.d(TAG, "Added ${allFiles.size} files to existing vault")
+                updatedVault
+            } else {
+                // Create new vault
+                val newVault = Vault(vaultId, allFiles as List<VaultFile>, timestamp, currentUser.uid)
+                vaultCollection.document(vaultId).set(newVault).await()
+                Log.d(TAG, "Created new vault with ${allFiles.size} files")
+                newVault
+            }
+
+            Result.success(resultVault)
         } catch (e: Exception) {
             Log.e(TAG, "Error uploading vault", e)
             Result.failure(e)
@@ -86,35 +119,62 @@ class VaultRepository {
     }
 
     // Safe delete file
-    suspend fun deleteFile(file: VaultFile) {
-        try {
-            val currentUser = auth.currentUser ?: return
+    suspend fun deleteFile(file: VaultFile): Result<Unit> {
+        return try {
+            val currentUser = auth.currentUser
+                ?: return Result.failure(Exception("No user signed in"))
 
-            // Skip placeholders
+            // Validate URL
             if (!file.url.startsWith("https://")) {
                 Log.w(TAG, "Skipping delete, invalid storage URL: ${file.url}")
-                return
+                return Result.failure(Exception("Invalid file URL"))
             }
 
             // Delete from Storage
-            val ref = storage.getReferenceFromUrl(file.url)
-            ref.delete().await()
-            Log.d(TAG, "Deleted file from storage: ${file.url}")
+            try {
+                val ref = storage.getReferenceFromUrl(file.url)
+                ref.delete().await()
+                Log.d(TAG, "Deleted file from storage: ${file.url}")
+            } catch (e: Exception) {
+                Log.w(TAG, "Could not delete file from storage (may not exist): ${file.url}", e)
+                // Continue with Firestore deletion even if storage deletion fails
+            }
 
             // Delete from Firestore
             val snapshot = vaultCollection.whereEqualTo("uid", currentUser.uid).get().await()
+            var fileDeleted = false
+
             for (doc in snapshot.documents) {
                 val vault = doc.toObject(Vault::class.java) ?: continue
                 val updatedFiles = vault.files.filter { it.url != file.url }
-                vaultCollection.document(vault.vaultId).update("files", updatedFiles).await()
+
+                if (updatedFiles.size != vault.files.size) {
+                    fileDeleted = true
+                    if (updatedFiles.isEmpty()) {
+                        // Delete entire vault if no files left
+                        vaultCollection.document(vault.vaultId).delete().await()
+                        Log.d(TAG, "Deleted empty vault: ${vault.vaultId}")
+                    } else {
+                        // Update vault with remaining files
+                        vaultCollection.document(vault.vaultId).update("files", updatedFiles).await()
+                        Log.d(TAG, "Updated vault with ${updatedFiles.size} remaining files")
+                    }
+                }
             }
-            Log.d(TAG, "Deleted file from Firestore successfully")
+
+            if (!fileDeleted) {
+                return Result.failure(Exception("File not found in vault"))
+            }
+
+            Log.d(TAG, "Successfully deleted file from vault")
+            Result.success(Unit)
         } catch (e: Exception) {
             Log.e(TAG, "Error deleting file", e)
+            Result.failure(e)
         }
     }
 
-    // Safe get download URL
+    // Safe get download URL with callback
     fun getDownloadUrl(file: VaultFile, onComplete: (String?) -> Unit) {
         if (!file.url.startsWith("https://")) {
             Log.w(TAG, "Cannot download, invalid storage URL: ${file.url}")
@@ -136,38 +196,111 @@ class VaultRepository {
         }
     }
 
-    // Get current user's vault items
+    // Get download URL with coroutines
+    suspend fun getDownloadUrlAsync(file: VaultFile): Result<String> {
+        return try {
+            if (!file.url.startsWith("https://")) {
+                return Result.failure(Exception("Invalid storage URL: ${file.url}"))
+            }
+
+            val ref = storage.getReferenceFromUrl(file.url)
+            val uri = ref.downloadUrl.await()
+            Result.success(uri.toString())
+        } catch (e: Exception) {
+            Log.e(TAG, "Error getting download URL", e)
+            Result.failure(e)
+        }
+    }
+
+    // Get current user's vault items with better sorting
     suspend fun getRecentVaultItems(uid: String): List<Vault> {
         return try {
-            val snapshot = vaultCollection.whereEqualTo("uid", uid).get().await()
-            val items = snapshot.documents.mapNotNull { it.toObject(Vault::class.java) }
-            items.sortedByDescending { it.submitDate }
+            val snapshot = vaultCollection
+                .whereEqualTo("uid", uid)
+                .orderBy("submitDate", Query.Direction.DESCENDING)
+                .get()
+                .await()
+
+            val items = snapshot.documents.mapNotNull { doc ->
+                try {
+                    doc.toObject(Vault::class.java)
+                } catch (e: Exception) {
+                    Log.w(TAG, "Failed to parse vault document: ${doc.id}", e)
+                    null
+                }
+            }
+
+            Log.d(TAG, "Retrieved ${items.size} vault items for user: $uid")
+            items
         } catch (e: Exception) {
             Log.e(TAG, "Error fetching recent vault items", e)
             emptyList()
         }
     }
 
-    // Upload multiple files to Storage
+    // Get vault statistics
+    suspend fun getVaultStatistics(uid: String): VaultStatistics {
+        return try {
+            val vaults = getRecentVaultItems(uid)
+            val allFiles = vaults.flatMap { it.files }
+
+            VaultStatistics(
+                totalFiles = allFiles.size,
+                photoCount = allFiles.count { it.type == FileType.PHOTO },
+                videoCount = allFiles.count { it.type == FileType.VIDEO },
+                audioCount = allFiles.count { it.type == FileType.AUDIO },
+                documentCount = allFiles.count { it.type == FileType.DOCUMENTS },
+                totalVaults = vaults.size,
+                lastUpload = vaults.maxOfOrNull { it.submitDate } ?: 0L
+            )
+        } catch (e: Exception) {
+            Log.e(TAG, "Error getting vault statistics", e)
+            VaultStatistics()
+        }
+    }
+
+    // Upload multiple files to Storage with better error handling
     private suspend fun uploadFiles(type: String, uris: List<Uri>, uid: String, vaultId: String): List<String> {
+        if (uris.isEmpty()) return emptyList()
+
         val urls = mutableListOf<String>()
-        for (uri in uris) {
+
+        for ((index, uri) in uris.withIndex()) {
             try {
-                val fileName = UUID.randomUUID().toString()
+                val fileName = "${System.currentTimeMillis()}_${index}_${UUID.randomUUID()}"
                 val ref = storage.reference.child("vault/$uid/$vaultId/$type/$fileName")
 
-                val safeUri = if (uri.scheme.isNullOrBlank() || uri.scheme == "file") {
-                    Uri.fromFile(File(uri.path!!))
-                } else uri
+                // Handle different URI schemes
+                val safeUri = when {
+                    uri.scheme.isNullOrBlank() -> Uri.fromFile(File(uri.path!!))
+                    uri.scheme == "file" -> Uri.fromFile(File(uri.path!!))
+                    else -> uri
+                }
 
-                ref.putFile(safeUri).await()
+                // Upload file
+                val uploadTask = ref.putFile(safeUri).await()
                 val downloadUrl = ref.downloadUrl.await().toString()
                 urls.add(downloadUrl)
-                Log.d(TAG, "Uploaded $type file URL: $downloadUrl")
+
+                Log.d(TAG, "Successfully uploaded $type file ${index + 1}/${uris.size}: $downloadUrl")
             } catch (e: Exception) {
-                Log.e(TAG, "Failed to upload a $type file: $uri", e)
+                Log.e(TAG, "Failed to upload $type file ${index + 1}/${uris.size}: $uri", e)
+                // Continue with other files even if one fails
             }
         }
+
+        Log.d(TAG, "Upload summary for $type: ${urls.size}/${uris.size} files successful")
         return urls
     }
 }
+
+// Data class for vault statistics
+data class VaultStatistics(
+    val totalFiles: Int = 0,
+    val photoCount: Int = 0,
+    val videoCount: Int = 0,
+    val audioCount: Int = 0,
+    val documentCount: Int = 0,
+    val totalVaults: Int = 0,
+    val lastUpload: Long = 0L
+)

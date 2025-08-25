@@ -26,6 +26,17 @@
     <string name="sheguard">SHEGuard</string>
     <string name="volume_button_service_description">Detect volume button presses for panic recording.</string>
     <string name="accessibility_service_description">Volume button service for SHEGuard</string>
-
+    <string name="secure_vault">Secure Vault</string>
+    <string name="all_files">All Files</string>
+    <string name="upload_files">Upload Files</string>
+    <string name="no_files_found">No files found</string>
+    <string name="file_deleted">File deleted successfully</string>
+    <string name="file_upload_success">Files uploaded successfully</string>
+    <string name="file_upload_failed">Upload failed</string>
+    <string name="permission_denied">Permission denied</string>
+    <string name="no_user_signed_in">Please log in to access vault</string>
+    <string name="error_loading_files">Error loading files</string>
+    <string name="cannot_open_file">Cannot open file</string>
+    <string name="cannot_get_download_url">Cannot get download URL</string>
 
 </resources>

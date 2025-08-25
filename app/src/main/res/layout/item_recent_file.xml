@@ -1,34 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:padding="8dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="150dp"
+    android:layout_height="120dp"
+    android:layout_margin="8dp"
+    android:background="@drawable/action_button_background"
+    android:orientation="vertical"
+    android:padding="12dp"
+    android:gravity="center">
 
     <ImageView
         android:id="@+id/thumbnailImageView"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:contentDescription="Thumbnail"
-        android:scaleType="centerCrop"/>
+        android:contentDescription="File Thumbnail"
+        android:scaleType="centerInside"
+        android:background="@drawable/button_background"
+        android:padding="8dp"
+        android:layout_marginBottom="8dp"/>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_marginStart="12dp"
+    <TextView
+        android:id="@+id/fileTypeTextView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:text="File Type"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:layout_marginBottom="4dp"/>
 
-        <TextView
-            android:id="@+id/fileTypeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="File Type"
-            android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/uploadTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload Time"
+        android:textColor="#E1BEE7"
+        android:textSize="10sp"
+        android:gravity="center"
+        android:maxLines="1"
+        android:ellipsize="end"/>
 
-        <TextView
-            android:id="@+id/uploadTimeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Upload Time"/>
-    </LinearLayout>
 </LinearLayout>
