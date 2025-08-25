@@ -44,7 +44,6 @@ class VaultAdapter(
         return VaultViewHolder(view)
     }
 
-    // Update the onBindViewHolder method in VaultAdapter.kt:
 
     override fun onBindViewHolder(holder: VaultViewHolder, position: Int) {
         val (timestamp, vaultFile) = items[position]
@@ -54,10 +53,13 @@ class VaultAdapter(
             FileType.PHOTO -> "Photo"
             FileType.VIDEO -> "Video"
             FileType.AUDIO -> "Audio"
+
             FileType.DOCUMENTS -> "Document"  // Add this
+
         }
         holder.submitDate.text =
             SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault()).format(Date(timestamp))
+
 
         // Set appropriate thumbnail
         holder.thumbnail.setImageResource(
@@ -68,6 +70,9 @@ class VaultAdapter(
                 FileType.DOCUMENTS -> android.R.drawable.ic_menu_info_details  // Add this
             }
         )
+
+        // Placeholder thumbnail
+        holder.thumbnail.setImageResource(android.R.drawable.ic_menu_report_image)
 
         // Button actions
         holder.deleteButton.setOnClickListener {

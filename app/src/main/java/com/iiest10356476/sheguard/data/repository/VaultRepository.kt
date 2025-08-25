@@ -4,7 +4,9 @@ import android.net.Uri
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+
 import com.google.firebase.firestore.Query
+
 import com.google.firebase.storage.FirebaseStorage
 import com.iiest10356476.sheguard.data.models.FileType
 import com.iiest10356476.sheguard.data.models.Vault
@@ -20,6 +22,7 @@ class VaultRepository {
     private val storage = FirebaseStorage.getInstance()
     private val vaultCollection = firestore.collection("Vault")
     private val TAG = "VaultRepository"
+
 
     // Save individual vault file
     suspend fun saveVaultFile(fileUrl: String, fileType: FileType): Result<Unit> {
@@ -37,7 +40,9 @@ class VaultRepository {
                 // Append the new file to existing Vault
                 val updatedFiles = existingVault.files + vaultFile
                 vaultCollection.document(existingVault.vaultId).update("files", updatedFiles).await()
+
                 Log.d(TAG, "Added file to existing vault: $fileUrl")
+
             } else {
                 // Create a new Vault document
                 val vaultId = UUID.randomUUID().toString()
@@ -48,6 +53,7 @@ class VaultRepository {
                     uid = currentUser.uid
                 )
                 vaultCollection.document(vaultId).set(newVault).await()
+
                 Log.d(TAG, "Created new vault with file: $fileUrl")
             }
 
@@ -66,8 +72,7 @@ class VaultRepository {
         documents: List<Uri> = emptyList()
     ): Result<Vault> {
         return try {
-            val currentUser = auth.currentUser
-                ?: return Result.failure(Exception("No user signed in"))
+            val currentUser = auth.currentUser ?: return Result.failure(Exception("No user signed in"))
 
             if (photos.isEmpty() && videos.isEmpty() && audios.isEmpty() && documents.isEmpty()) {
                 return Result.failure(Exception("No files to upload"))
@@ -75,6 +80,7 @@ class VaultRepository {
 
             val vaultId = UUID.randomUUID().toString()
             val timestamp = System.currentTimeMillis()
+
 
             // Upload files and create VaultFile objects
             val photoFiles = uploadFiles("photos", photos, currentUser.uid, vaultId)
@@ -196,6 +202,7 @@ class VaultRepository {
         }
     }
 
+
     // Get download URL with coroutines
     suspend fun getDownloadUrlAsync(file: VaultFile): Result<String> {
         return try {
@@ -232,11 +239,13 @@ class VaultRepository {
 
             Log.d(TAG, "Retrieved ${items.size} vault items for user: $uid")
             items
+
         } catch (e: Exception) {
             Log.e(TAG, "Error fetching recent vault items", e)
             emptyList()
         }
     }
+
 
     // Get vault statistics
     suspend fun getVaultStatistics(uid: String): VaultStatistics {
@@ -290,6 +299,7 @@ class VaultRepository {
         }
 
         Log.d(TAG, "Upload summary for $type: ${urls.size}/${uris.size} files successful")
+
         return urls
     }
 }

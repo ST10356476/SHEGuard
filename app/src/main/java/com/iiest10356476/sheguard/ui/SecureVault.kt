@@ -17,7 +17,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+
 import com.google.firebase.auth.FirebaseAuth
+
 import com.iiest10356476.sheguard.R
 import com.iiest10356476.sheguard.data.models.FileType
 import com.iiest10356476.sheguard.data.models.Vault
@@ -25,11 +27,14 @@ import com.iiest10356476.sheguard.data.repository.VaultRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
 import kotlinx.coroutines.withContext
 import com.google.firebase.firestore.FirebaseFirestore
+
 import kotlinx.coroutines.tasks.await
 
 class SecureVault : AppCompatActivity() {
+
 
     private val vaultRepo = VaultRepository() // Using your current constructor
     private val selectedUris = mutableListOf<Uri>()
@@ -49,6 +54,7 @@ class SecureVault : AppCompatActivity() {
 
     private var vaultItems: List<Vault> = emptyList()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -59,6 +65,7 @@ class SecureVault : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
 
         initializeViews()
         setupClickListeners()
@@ -84,9 +91,14 @@ class SecureVault : AppCompatActivity() {
 
     private fun setupClickListeners() {
         findViewById<Button>(R.id.view_all_button).setOnClickListener {
+
+        val viewAllButton = findViewById<Button>(R.id.view_all_button)
+        viewAllButton.setOnClickListener {
+
             val intent = Intent(this, SecureVaultViewAll::class.java)
             startActivity(intent)
         }
+
 
         findViewById<Button>(R.id.upload_button).setOnClickListener {
             checkPermissionsAndPickFiles()
@@ -377,6 +389,15 @@ class SecureVault : AppCompatActivity() {
                 }
             }
         }
+
+
+        val uploadButton = findViewById<Button>(R.id.upload_button)
+        uploadButton.setOnClickListener {
+            checkPermissionsAndPickFiles()
+        }
+
+        // Setup RecyclerView
+        recentFilesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     }
 
     // Permission launcher
@@ -405,6 +426,7 @@ class SecureVault : AppCompatActivity() {
             }
         }
 
+
     // File picker launcher for specific file types
     private val pickSpecificFilesLauncher =
         registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris ->
@@ -415,6 +437,7 @@ class SecureVault : AppCompatActivity() {
                 Log.d("SecureVault", "No specific files selected")
             }
         }
+
 
     private fun checkPermissionsAndPickFiles() {
         val permissions = mutableListOf<String>()
@@ -440,6 +463,7 @@ class SecureVault : AppCompatActivity() {
     }
 
     private fun uploadSelectedFiles() {
+
         if (selectedUris.isEmpty()) {
             Log.w("SecureVault", "No files to upload")
             return
@@ -458,6 +482,7 @@ class SecureVault : AppCompatActivity() {
         val documentUris = selectedUris.filter { uri ->
             contentResolver.getType(uri)?.startsWith("documents/") == true
         }
+
 
         Log.d("SecureVault", "Categorized files - Photos: ${photoUris.size}, Videos: ${videoUris.size}, Audio: ${audioUris.size}")
         uploadFiles(photoUris, videoUris, audioUris, documentUris)
@@ -504,6 +529,7 @@ class SecureVault : AppCompatActivity() {
 
         CoroutineScope(Dispatchers.Main).launch {
             try {
+
                 val result = withContext(Dispatchers.IO) {
                     vaultRepo.uploadVault(
                         photos = photoUris,
@@ -511,6 +537,10 @@ class SecureVault : AppCompatActivity() {
                         audios = audioUris,
                         documents = documentUris
                     )
+
+                runOnUiThread {
+                    Toast.makeText(this@SecureVault, "Upload successful!", Toast.LENGTH_SHORT).show()
+
                 }
 
                 // Handle Result type properly
@@ -533,9 +563,11 @@ class SecureVault : AppCompatActivity() {
         }
     }
 
+
     override fun onResume() {
         super.onResume()
         Log.d("SecureVault", "Activity resumed, refreshing data")
         loadVaultData() // Refresh data when returning to activity
     }
 }
+

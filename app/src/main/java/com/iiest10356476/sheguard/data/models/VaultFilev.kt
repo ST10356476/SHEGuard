@@ -4,4 +4,6 @@ data class VaultFile(
     val url: String = "",
     val type: FileType = FileType.PHOTO
 )
+
 enum class FileType { PHOTO, VIDEO, AUDIO, DOCUMENTS }
+

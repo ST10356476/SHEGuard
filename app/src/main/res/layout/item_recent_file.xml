@@ -8,10 +8,12 @@
     android:padding="12dp"
     android:gravity="center">
 
+
     <ImageView
         android:id="@+id/thumbnailImageView"
         android:layout_width="48dp"
         android:layout_height="48dp"
+
         android:contentDescription="File Thumbnail"
         android:scaleType="centerInside"
         android:background="@drawable/button_background"
@@ -41,3 +43,4 @@
         android:ellipsize="end"/>
 
 </LinearLayout>
+

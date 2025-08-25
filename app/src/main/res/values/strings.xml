@@ -26,6 +26,7 @@
     <string name="sheguard">SHEGuard</string>
     <string name="volume_button_service_description">Detect volume button presses for panic recording.</string>
     <string name="accessibility_service_description">Volume button service for SHEGuard</string>
+
     <string name="secure_vault">Secure Vault</string>
     <string name="all_files">All Files</string>
     <string name="upload_files">Upload Files</string>
