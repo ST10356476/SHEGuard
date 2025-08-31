@@ -100,4 +100,29 @@ dependencies {
     //JSON Handling
     implementation("com.google.code.gson:gson:2.13.1")
 
+    //local tests
+    testImplementation("org.mockito:mockito-inline:5.2.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.2.1")
+    testImplementation("androidx.test:core:1.7.0")
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
+    testImplementation("com.google.truth:truth:1.4.4")
+    testImplementation("com.squareup.okhttp3:mockwebserver:5.1.0")
+    testImplementation("io.mockk:mockk:1.14.5")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:1.9.0")
+
+
+    //Instrumentation tests
+    androidTestImplementation(libs.junit)
+    androidTestImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
+    androidTestImplementation("androidx.arch.core:core-testing:2.2.0")
+    androidTestImplementation("com.google.truth:truth:1.4.4")
+    androidTestImplementation("androidx.test.ext:junit:1.3.0")
+    androidTestImplementation("androidx.test:core-ktx:1.7.0")
+    androidTestImplementation("com.squareup.okhttp3:mockwebserver:5.1.0")
+    androidTestImplementation("io.mockk:mockk-android:1.14.5")
+    androidTestImplementation("androidx.test:runner:1.7.0")
+    androidTestImplementation(kotlin("test"))
+    testImplementation(kotlin("test"))
+
 }
