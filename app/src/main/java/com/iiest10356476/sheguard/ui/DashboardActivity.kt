@@ -69,9 +69,8 @@ class DashboardActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_settings -> {
-                    // Navigate to Settings activity
-                    // val intent = Intent(this, SettingsActivity::class.java)
-                    // startActivity(intent)
+                    val intent = Intent(this, SettingsActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 else -> false
