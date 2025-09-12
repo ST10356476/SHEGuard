@@ -134,7 +134,7 @@ class SecureVault : AppCompatActivity() {
     private fun setupClickListeners() {
         // Main action buttons
         findViewById<Button>(R.id.view_all_button).setOnClickListener {
-            startActivity(Intent(this, SecureVaultViewAll::class.java))
+            startActivity(Intent(this, SecureActivity::class.java))
         }
 
         findViewById<Button>(R.id.upload_button).setOnClickListener {
