@@ -39,6 +39,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SHEGuard"
         tools:targetApi="31">
+
+        <activity
+            android:name=".ui.SettingsActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.LiveTrackingMapActivity"
             android:exported="false" />

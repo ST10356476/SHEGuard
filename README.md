@@ -21,7 +21,7 @@ Gender-based violence (GBV) is a critical issue in South Africa. Many women lack
 ### 🔒 Secure Evidence Vault
 - Store **photos**, **videos**, and **voice notes** privately.
 - Encrypted storage to keep sensitive information safe.
-- Share evidence securely with trusted contacts or authorities.
+- Share evidence securely with trusted contacts or authorities. 
 
 ### 💬 Support Access
 - Quick access to **legal aid**, **counseling**, and **GBV helplines**.
