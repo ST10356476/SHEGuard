@@ -194,6 +194,12 @@ class SecureVaultViewAll : AppCompatActivity() {
         Log.d(TAG, "Filter counts updated: $fileCounts")
     }
 
+    private fun navigateWithAuthentication(targetActivity: String) {
+        val intent = Intent(this, SecureActivity::class.java)
+        intent.putExtra(SecureActivity.EXTRA_TARGET_ACTIVITY, targetActivity)
+        startActivity(intent)
+    }
+
     private data class FileTypeCounts(
         val total: Int,
         val photos: Int,

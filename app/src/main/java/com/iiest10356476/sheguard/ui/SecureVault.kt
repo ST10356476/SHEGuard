@@ -132,9 +132,11 @@ class SecureVault : AppCompatActivity() {
     }
 
     private fun setupClickListeners() {
-        // Main action buttons
+        // Main action buttons - NO MORE AUTHENTICATION NEEDED
         findViewById<Button>(R.id.view_all_button).setOnClickListener {
-            startActivity(Intent(this, SecureActivity::class.java))
+            // Navigate directly to SecureVaultViewAll since user is already authenticated
+            val intent = Intent(this, SecureVaultViewAll::class.java)
+            startActivity(intent)
         }
 
         findViewById<Button>(R.id.upload_button).setOnClickListener {
