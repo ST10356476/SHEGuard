@@ -23,10 +23,10 @@ class DashboardActivity : AppCompatActivity() {
             insets
         }
 
-        // Set up secure vault button click - NOW GOES TO AUTHENTICATION FIRST
+        // Set up secure vault button click
         val openVaultButton = findViewById<LinearLayout>(R.id.secure_vault_button)
         openVaultButton.setOnClickListener {
-            val intent = Intent(this, SecureActivity::class.java)
+            val intent = Intent(this, SecureVault::class.java)
             startActivity(intent)
         }
 
@@ -58,8 +58,7 @@ class DashboardActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_vault -> {
-                    // Navigate to vault with authentication first
-                    val intent = Intent(this, SecureActivity::class.java)
+                    val intent = Intent(this, SecureVault::class.java)
                     startActivity(intent)
                     true
                 }
