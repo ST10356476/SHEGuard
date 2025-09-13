@@ -53,6 +53,8 @@ class SecureVaultViewAll : AppCompatActivity() {
     private var vaultItems: List<Vault> = emptyList()
     private var currentFilter: FileType? = null
 
+
+
     // Permission and file picker launchers
     private val requestStoragePermission =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
@@ -75,7 +77,6 @@ class SecureVaultViewAll : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_secure_vault_view_all)
-
         setupWindowInsets()
         initializeViews()
         setupClickListeners()

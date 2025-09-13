@@ -426,7 +426,7 @@ class TrackingEventOperationActivity : AppCompatActivity() {
     }
 
     private fun isLocationEnabled(): Boolean {
-        val locationManager = getSystemService(android.content.Context.LOCATION_SERVICE) as android.location.LocationManager
+        val locationManager = getSystemService(LOCATION_SERVICE) as android.location.LocationManager
         return locationManager.isProviderEnabled(android.location.LocationManager.GPS_PROVIDER) ||
                 locationManager.isProviderEnabled(android.location.LocationManager.NETWORK_PROVIDER)
     }
@@ -437,7 +437,7 @@ class TrackingEventOperationActivity : AppCompatActivity() {
             .setMessage("Location services are required to share your location with emergency contacts. Would you like to enable them?")
             .setPositiveButton("Enable") { _, _ ->
                 // Open location settings
-                val intent = android.content.Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                val intent = Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)
                 startActivity(intent)
             }
             .setNegativeButton("Send Without Location") { _, _ ->
@@ -462,7 +462,7 @@ class TrackingEventOperationActivity : AppCompatActivity() {
         if (selectedContacts.isNotEmpty()) {
             try {
                 val firstContact = selectedContacts.first()
-                val intent = android.content.Intent(android.content.Intent.ACTION_VIEW).apply {
+                val intent = Intent(Intent.ACTION_VIEW).apply {
                     data = android.net.Uri.parse("https://wa.me/${firstContact.getFormattedPhoneNumber()}?text=${android.net.Uri.encode(finalMessage)}")
                     setPackage("com.whatsapp")
                 }
