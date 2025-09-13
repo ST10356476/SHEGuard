@@ -287,7 +287,7 @@ class VaultRepository {
                 }
 
                 // Upload file
-                val uploadTask = ref.putFile(safeUri).await()
+                ref.putFile(safeUri).await()
                 val downloadUrl = ref.downloadUrl.await().toString()
                 urls.add(downloadUrl)
 

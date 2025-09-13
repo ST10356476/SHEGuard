@@ -20,6 +20,7 @@ import androidx.camera.video.Recording
 import androidx.camera.video.VideoCapture
 import androidx.camera.video.VideoRecordEvent
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.LifecycleService
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore

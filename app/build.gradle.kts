@@ -56,6 +56,9 @@ dependencies {
     implementation("androidx.camera:camera-view:1.4.2")
     implementation("com.google.guava:guava:33.4.8-android")
 
+    //Authentication
+    implementation("androidx.biometric:biometric-ktx:1.4.0-alpha02")
+
     implementation(libs.androidx.recyclerview)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
