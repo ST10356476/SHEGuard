@@ -45,7 +45,7 @@ class TrackingEventOperationActivity : AppCompatActivity() {
         "on_date" to "Going on a date tonight! Sharing my location with you for safety. Will text you when I'm home safe. 💕"
     )
 
-    // Permission launcher for both location and contacts
+    // Permission launcher for location and contacts
     private val permissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
@@ -105,7 +105,7 @@ class TrackingEventOperationActivity : AppCompatActivity() {
             finish()
         }
 
-        // Add contact button - now shows phone contacts
+        // Add contact button - shows phone contacts
         findViewById<Button>(R.id.add_contact_button).setOnClickListener {
             if (hasContactsPermission()) {
                 loadContactsFromPhone()
@@ -139,16 +139,6 @@ class TrackingEventOperationActivity : AppCompatActivity() {
         findViewById<Button>(R.id.send_whatsapp_button).setOnClickListener {
             sendLocationToContacts()
         }
-
-        // Add a test location button (optional - for debugging)
-        // You can add this temporarily to test location
-        /*
-        val testLocationButton = Button(this)
-        testLocationButton.text = "Test Location"
-        testLocationButton.setOnClickListener {
-            testLocation()
-        }
-        */
     }
 
     private fun loadSavedEmergencyContacts() {
@@ -177,39 +167,44 @@ class TrackingEventOperationActivity : AppCompatActivity() {
     private fun getPhoneContacts(): List<EmergencyContact> {
         val contacts = mutableListOf<EmergencyContact>()
 
-        val cursor: Cursor? = contentResolver.query(
-            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-            arrayOf(
-                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
-                ContactsContract.CommonDataKinds.Phone.NUMBER
-            ),
-            null,
-            null,
-            ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " ASC"
-        )
+        try {
+            val cursor: Cursor? = contentResolver.query(
+                ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                arrayOf(
+                    ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+                    ContactsContract.CommonDataKinds.Phone.NUMBER
+                ),
+                null,
+                null,
+                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " ASC"
+            )
 
-        cursor?.use {
-            val nameIndex = it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
-            val numberIndex = it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
+            cursor?.use {
+                val nameIndex = it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
+                val numberIndex = it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
 
-            while (it.moveToNext()) {
-                val name = it.getString(nameIndex) ?: ""
-                val phoneNumber = it.getString(numberIndex) ?: ""
+                while (it.moveToNext()) {
+                    val name = if (nameIndex >= 0) it.getString(nameIndex) ?: "" else ""
+                    val phoneNumber = if (numberIndex >= 0) it.getString(numberIndex) ?: "" else ""
 
-                if (name.isNotEmpty() && phoneNumber.isNotEmpty()) {
-                    val contact = EmergencyContact(
-                        id = UUID.randomUUID().toString(),
-                        name = name,
-                        phoneNumber = phoneNumber.replace(Regex("[^+\\d]"), ""), // Clean phone number
-                        isSelected = false
-                    )
+                    if (name.isNotEmpty() && phoneNumber.isNotEmpty()) {
+                        val contact = EmergencyContact(
+                            id = UUID.randomUUID().toString(),
+                            name = name,
+                            phoneNumber = phoneNumber.replace(Regex("[^+\\d]"), ""),
+                            isSelected = false
+                        )
 
-                    // Avoid duplicates
-                    if (!contacts.any { existing -> existing.phoneNumber == contact.phoneNumber }) {
-                        contacts.add(contact)
+                        if (!contacts.any { existing -> existing.phoneNumber == contact.phoneNumber }) {
+                            contacts.add(contact)
+                        }
                     }
                 }
             }
+        } catch (e: SecurityException) {
+            Toast.makeText(this, "Permission denied to read contacts", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Toast.makeText(this, "Error reading contacts", Toast.LENGTH_SHORT).show()
         }
 
         return contacts
@@ -242,7 +237,6 @@ class TrackingEventOperationActivity : AppCompatActivity() {
         val contactsHelper = ContactsPreferencesHelper(this)
 
         contacts.forEach { contact ->
-            // Check if contact already exists
             val exists = emergencyContacts.any { it.phoneNumber == contact.phoneNumber }
             if (!exists) {
                 emergencyContacts.add(contact)
@@ -258,7 +252,6 @@ class TrackingEventOperationActivity : AppCompatActivity() {
         if (index != -1) {
             emergencyContacts[index] = contact.copy(isSelected = isSelected)
 
-            // Save to preferences
             val contactsHelper = ContactsPreferencesHelper(this)
             contactsHelper.updateContact(emergencyContacts[index])
         }
@@ -268,7 +261,6 @@ class TrackingEventOperationActivity : AppCompatActivity() {
         selectedMessage = presetMessages[messageKey] ?: ""
         customMessageInput.setText(selectedMessage)
 
-        // Update button appearances (you can add visual feedback here)
         Toast.makeText(this, "Message template selected", Toast.LENGTH_SHORT).show()
     }
 
@@ -294,7 +286,6 @@ class TrackingEventOperationActivity : AppCompatActivity() {
                     contactsAdapter.addContact(newContact)
                     emergencyContacts.add(newContact)
 
-                    // Save to preferences
                     val contactsHelper = ContactsPreferencesHelper(this)
                     contactsHelper.addContact(newContact)
 
@@ -320,13 +311,11 @@ class TrackingEventOperationActivity : AppCompatActivity() {
             return
         }
 
-        // Check if location is enabled
         if (!isLocationEnabled()) {
             showLocationEnableDialog()
             return
         }
 
-        // Show duration selection dialog
         showDurationSelectionDialog(message)
     }
 
@@ -359,7 +348,6 @@ class TrackingEventOperationActivity : AppCompatActivity() {
     }
 
     private fun startLiveLocationTracking(duration: Long, message: String) {
-        // Start the live location service
         val serviceIntent = Intent(this, LiveLocationTracker::class.java).apply {
             action = LiveLocationTracker.ACTION_START_TRACKING
             putExtra(LiveLocationTracker.EXTRA_DURATION, duration)
@@ -374,10 +362,8 @@ class TrackingEventOperationActivity : AppCompatActivity() {
 
         Toast.makeText(this, "Live location sharing started!", Toast.LENGTH_LONG).show()
 
-        // Generate session ID
         val sessionId = "SHE${kotlin.random.Random.nextInt(1000, 9999)}"
 
-        // Launch map tracking screen
         val mapIntent = Intent(this, LiveTrackingMapActivity::class.java).apply {
             putExtra("session_id", sessionId)
             putExtra("is_tracking", true)
@@ -385,43 +371,6 @@ class TrackingEventOperationActivity : AppCompatActivity() {
         }
         startActivity(mapIntent)
 
-        // Close this activity
-        finish()
-    }
-
-    private fun showTrackingActiveDialog(duration: Long) {
-        val durationText = when {
-            duration >= 24 * 60 * 60 * 1000L -> "until you stop manually"
-            duration >= 60 * 60 * 1000L -> "${duration / (60 * 60 * 1000L)} hour(s)"
-            else -> "${duration / (60 * 1000L)} minutes"
-        }
-
-        AlertDialog.Builder(this)
-            .setTitle("🛡️ Live Tracking Active")
-            .setMessage(
-                "Your location is now being shared with your emergency contacts for $durationText.\n\n" +
-                        "• Location updates will be sent every minute\n" +
-                        "• You'll see a notification while tracking is active\n" +
-                        "• Your contacts will receive regular updates via WhatsApp\n" +
-                        "• Tap 'Stop Tracking' in the notification to end early"
-            )
-            .setPositiveButton("Got it") { _, _ ->
-                finish() // Return to previous screen
-            }
-            .setNegativeButton("Stop Tracking Now") { _, _ ->
-                stopLiveLocationTracking()
-            }
-            .setCancelable(false)
-            .show()
-    }
-
-    private fun stopLiveLocationTracking() {
-        val serviceIntent = Intent(this, LiveLocationTracker::class.java).apply {
-            action = LiveLocationTracker.ACTION_STOP_TRACKING
-        }
-        startService(serviceIntent)
-
-        Toast.makeText(this, "Live location tracking stopped", Toast.LENGTH_SHORT).show()
         finish()
     }
 
@@ -436,12 +385,10 @@ class TrackingEventOperationActivity : AppCompatActivity() {
             .setTitle("Enable Location Services")
             .setMessage("Location services are required to share your location with emergency contacts. Would you like to enable them?")
             .setPositiveButton("Enable") { _, _ ->
-                // Open location settings
                 val intent = Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS)
                 startActivity(intent)
             }
             .setNegativeButton("Send Without Location") { _, _ ->
-                // Send message without location
                 sendMessageWithoutLocation()
             }
             .setCancelable(false)
@@ -458,7 +405,6 @@ class TrackingEventOperationActivity : AppCompatActivity() {
         val selectedContacts = emergencyContacts.filter { it.isSelected }
         val finalMessage = "$message\n\n⚠️ Location services unavailable\n\n🛡️ Sent via SHEGuard for your safety"
 
-        // Directly send to WhatsApp without location
         if (selectedContacts.isNotEmpty()) {
             try {
                 val firstContact = selectedContacts.first()
@@ -494,7 +440,6 @@ class TrackingEventOperationActivity : AppCompatActivity() {
         if (permissionsToRequest.isNotEmpty()) {
             permissionLauncher.launch(permissionsToRequest.toTypedArray())
         } else {
-            // All permissions granted, check if location is enabled
             if (!isLocationEnabled()) {
                 Toast.makeText(this, "Please enable location services for better functionality", Toast.LENGTH_LONG).show()
             }
