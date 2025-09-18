@@ -1,63 +1,78 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
-    android:padding="8dp"
+    android:padding="12dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/action_button_background">
 
+    <!-- File Thumbnail -->
     <ImageView
         android:id="@+id/file_thumbnail"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:scaleType="centerCrop"
-        android:src="@android:drawable/ic_menu_report_image" />
+        android:src="@android:drawable/ic_menu_report_image"
+        android:contentDescription="@string/file_thumb_desc"
+        android:background="@drawable/button_background"
+        android:padding="8dp"/>
 
+    <!-- File Info -->
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:paddingStart="8dp">
+        android:paddingStart="12dp">
 
         <TextView
             android:id="@+id/file_name"
-            android:textSize="16sp"
-            android:textColor="#000"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="@string/file_name_placeholder"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:maxLines="1"
+            android:ellipsize="end"/>
 
         <TextView
             android:id="@+id/file_type"
-            android:textSize="14sp"
-            android:textColor="#666"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="@string/file_type_label"
+            android:textSize="14sp"
+            android:textColor="#666"/>
 
         <TextView
             android:id="@+id/submit_date"
-            android:textSize="12sp"
-            android:textColor="#999"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="@string/upload_time_label"
+            android:textSize="12sp"
+            android:textColor="#999"/>
 
+        <!-- Action Buttons -->
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp">
+            android:layout_marginTop="8dp">
 
             <Button
                 android:id="@+id/delete_button"
-                android:text="Delete"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="@string/delete"
+                style="@style/Widget.MaterialComponents.Button.TextButton"/>
 
             <Button
                 android:id="@+id/download_button"
-                android:text="Download"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"/>
+                android:text="@string/download"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_marginStart="12dp"/>
         </LinearLayout>
     </LinearLayout>
 

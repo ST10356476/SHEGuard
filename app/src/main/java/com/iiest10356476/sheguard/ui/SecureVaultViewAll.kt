@@ -31,7 +31,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class SecureVaultViewAll : AppCompatActivity() {
+class SecureVaultViewAll :  BaseActivity() {
 
     companion object {
         private const val TAG = "SecureVaultViewAll"

@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.iiest10356476.sheguard.R
 import com.iiest10356476.sheguard.ui.auth.LoginActivity
 
-class GetStartedActivity : AppCompatActivity() {
+class GetStartedActivity :  BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

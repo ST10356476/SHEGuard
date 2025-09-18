@@ -13,7 +13,6 @@
         android:padding="24dp"
         android:gravity="center_horizontal">
 
-
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -25,17 +24,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="SHEGuard"
+            android:text="@string/app_name"
             android:textSize="28sp"
             android:textStyle="bold"
             android:textColor="#6A1B9A" />
-
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Hi Welcome Back!"
+            android:text="@string/welcome_back_title"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#333333" />
@@ -45,11 +43,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginHorizontal="16dp"
-            android:text="Your Shield, Your Strength, Your Voice"
+            android:text="@string/login_subtitle"
             android:textSize="16sp"
             android:textColor="#666666"
             android:gravity="center" />
-
 
         <ImageView
             android:layout_width="60dp"
@@ -57,7 +54,6 @@
             android:layout_marginTop="24dp"
             android:src="@drawable/shield"
             android:scaleType="fitCenter" />
-
 
         <LinearLayout
             android:id="@+id/biometric_button"
@@ -88,7 +84,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Quick &amp; Secure Access"
+                    android:text="@string/biometric_title"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="#333333" />
@@ -96,14 +92,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Use fingerprint or face unlock"
+                    android:text="@string/biometric_subtitle"
                     android:textSize="12sp"
                     android:textColor="#666666" />
-
             </LinearLayout>
-
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -123,7 +116,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:text="OR"
+                android:text="@string/or_label"
                 android:textSize="14sp"
                 android:textColor="#999999" />
 
@@ -132,9 +125,7 @@
                 android:layout_height="1dp"
                 android:layout_weight="1"
                 android:background="#E0E0E0" />
-
         </LinearLayout>
-
 
         <EditText
             android:id="@+id/email_input"
@@ -143,13 +134,12 @@
             android:layout_marginTop="24dp"
             android:layout_marginHorizontal="16dp"
             android:background="@drawable/input_field_background"
-            android:hint="Email"
+            android:hint="@string/email"
             android:textColorHint="#999999"
             android:textColor="#333333"
             android:textSize="16sp"
             android:paddingHorizontal="16dp"
             android:inputType="textEmailAddress" />
-
 
         <EditText
             android:id="@+id/password_input"
@@ -158,13 +148,12 @@
             android:layout_marginTop="16dp"
             android:layout_marginHorizontal="16dp"
             android:background="@drawable/input_field_background"
-            android:hint="Password"
+            android:hint="@string/password"
             android:textColorHint="#999999"
             android:textColor="#333333"
             android:textSize="16sp"
             android:paddingHorizontal="16dp"
             android:inputType="textPassword" />
-
 
         <TextView
             android:id="@+id/forgot_password_link"
@@ -178,11 +167,10 @@
             android:focusable="true"
             android:minHeight="48dp"
             android:padding="8dp"
-            android:text="Forgot password?"
+            android:text="@string/forgot_password_question"
             android:textColor="#6A1B9A"
             android:textSize="14sp"
             android:textStyle="bold" />
-
 
         <Button
             android:id="@+id/sign_in_button"
@@ -190,13 +178,12 @@
             android:layout_height="56dp"
             android:layout_marginTop="24dp"
             android:layout_marginHorizontal="16dp"
-            android:text="Sign in"
+            android:text="@string/sign_in"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textAllCaps="false"
             android:backgroundTint="@color/ic_launcher_background"/>
-
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -208,7 +195,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Don't have an account? "
+                android:text="@string/dont_have_account_prompt"
                 android:textSize="14sp"
                 android:textColor="#666666" />
 
@@ -216,7 +203,7 @@
                 android:id="@+id/sign_up_link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sign up"
+                android:text="@string/sign_up"
                 android:textSize="14sp"
                 android:textColor="#6A1B9A"
                 android:textStyle="bold"
@@ -224,9 +211,6 @@
                 android:focusable="true"
                 android:background="?android:attr/selectableItemBackground"
                 android:padding="4dp" />
-
         </LinearLayout>
-
     </LinearLayout>
-
 </ScrollView>

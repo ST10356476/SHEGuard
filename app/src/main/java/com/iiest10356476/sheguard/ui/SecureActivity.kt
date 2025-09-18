@@ -12,7 +12,7 @@ import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import com.iiest10356476.sheguard.R
 
-class SecureActivity : AppCompatActivity() {
+class SecureActivity :  BaseActivity() {
 
     companion object {
         private const val TAG = "SecureActivity" // Define our own TAG

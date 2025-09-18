@@ -28,7 +28,7 @@
             android:focusable="true"
             android:padding="12dp"
             android:scaleType="fitCenter"
-            android:contentDescription="Back"
+            android:contentDescription="@string/back_button_desc"
             android:src="@drawable/left_arrow" />
 
         <LinearLayout
@@ -43,18 +43,18 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/sheguard_logo"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:contentDescription="@string/logo_desc" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="Settings"
+                android:text="@string/settings"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="#6A1B9A" />
         </LinearLayout>
-
     </LinearLayout>
 
     <!-- Settings Content -->
@@ -79,14 +79,14 @@
                 android:src="@drawable/sheguard_settings"
                 android:scaleType="fitCenter"
                 android:layout_gravity="center_horizontal"
-                android:contentDescription="SHEGuard Settings Logo" />
+                android:contentDescription="@string/settings_logo_desc" />
 
             <!-- Settings Title -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Manage Your Account"
+                android:text="@string/manage_account_title"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
@@ -98,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Customize your SHEGuard experience"
+                android:text="@string/manage_account_subtitle"
                 android:textSize="16sp"
                 android:textColor="#E1BEE7"
                 android:gravity="center"
@@ -135,7 +135,6 @@
                             android:layout_gravity="center"
                             android:src="@drawable/sheguard_password"
                             android:scaleType="fitXY" />
-
                     </FrameLayout>
 
                     <LinearLayout
@@ -148,7 +147,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Profile"
+                            android:text="@string/my_profile"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:textColor="@android:color/white" />
@@ -157,13 +156,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="Manage your personal information"
+                            android:text="@string/manage_profile_subtitle"
                             android:textSize="12sp"
                             android:textColor="#E1BEE7" />
-
                     </LinearLayout>
-
-
                 </LinearLayout>
 
                 <!-- 2. Change Password Button -->
@@ -190,7 +186,6 @@
                             android:layout_gravity="center"
                             android:src="@drawable/sheguard_password"
                             android:scaleType="fitXY" />
-
                     </FrameLayout>
 
                     <LinearLayout
@@ -203,7 +198,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Change Password"
+                            android:text="@string/change_password"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:textColor="@android:color/white" />
@@ -212,14 +207,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="Update your security credentials"
+                            android:text="@string/change_password_subtitle"
                             android:textSize="12sp"
                             android:textColor="#E1BEE7" />
-
                     </LinearLayout>
-
-
-
                 </LinearLayout>
 
                 <!-- 3. Change Language Button -->
@@ -246,7 +237,6 @@
                             android:layout_gravity="center"
                             android:src="@drawable/sheguard_language"
                             android:scaleType="fitXY" />
-
                     </FrameLayout>
 
                     <LinearLayout
@@ -259,7 +249,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Change Language"
+                            android:text="@string/change_language"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:textColor="@android:color/white" />
@@ -268,14 +258,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="Select your preferred language"
+                            android:text="@string/change_language_subtitle"
                             android:textSize="12sp"
                             android:textColor="#E1BEE7" />
-
                     </LinearLayout>
-
-
-
                 </LinearLayout>
 
                 <!-- 4. Policy Button -->
@@ -302,7 +288,6 @@
                             android:layout_gravity="center"
                             android:src="@drawable/sheguard_policy"
                             android:scaleType="fitXY" />
-
                     </FrameLayout>
 
                     <LinearLayout
@@ -315,7 +300,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Policy"
+                            android:text="@string/privacy_policy_title"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:textColor="@android:color/white" />
@@ -324,17 +309,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="Privacy policy and terms of service"
+                            android:text="@string/policy_and_terms_subtitle"
                             android:textSize="12sp"
                             android:textColor="#E1BEE7" />
-
                     </LinearLayout>
-
-
-
                 </LinearLayout>
 
-                <!-- 5. Delete Account Button (Different styling for danger) -->
+                <!-- 5. Delete Account Button -->
                 <LinearLayout
                     android:id="@+id/delete_account_button"
                     android:layout_width="match_parent"
@@ -359,7 +340,6 @@
                             android:src="@drawable/sheguard_delete"
                             android:scaleType="centerCrop"
                             android:layout_margin="6dp" />
-
                     </FrameLayout>
 
                     <LinearLayout
@@ -372,7 +352,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Delete Account"
+                            android:text="@string/delete_account"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:textColor="#FFCDD2" />
@@ -381,20 +361,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="Permanently delete your account"
+                            android:text="@string/delete_account_subtitle"
                             android:textSize="12sp"
                             android:textColor="#FFAAAA" />
-
                     </LinearLayout>
-
-
-
                 </LinearLayout>
-
             </LinearLayout>
-
         </LinearLayout>
-
     </ScrollView>
 
     <!-- Fixed Bottom Navigation -->
@@ -409,5 +382,4 @@
         app:itemTextColor="@color/bottom_nav_text_colors"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_navigation_menu" />
-
 </RelativeLayout>

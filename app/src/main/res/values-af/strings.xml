@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SHEGuard</string>
+    <string name="settings">Instellings</string>
+    <string name="my_profile">My Profiel</string>
+    <string name="change_language">Verander Taal</string>
+    <string name="change_password">Verander Wagwoord</string>
+    <string name="policy">Beleid</string>
+    <string name="delete_account">Skrap Rekening</string>
+    <string name="she_care">SHECare</string>
+    <string name="select_language">Kies Taal</string>
+    <string name="cancel">Kanselleer</string>
+    <string name="apply">Toepas</string>
+    <string name="english">Engels</string>
+    <string name="afrikaans">Afrikaans</string>
+    <string name="isizulu">isiZulu</string>
+    <string name="isixhosa">isiXhosa</string>
+    <string name="select_emergency_contacts">Kies Noodkontakte</string>
+    <string name="add">Voeg By</string>
+    <string name="choose_message">Kies Boodskap</string>
+    <string name="going_out">Gaan Uit</string>
+    <string name="working_late">Werk Laat</string>
+    <string name="traveling">Reis</string>
+    <string name="on_date">Op ’n Afspraak</string>
+    <string name="custom_message_hint">Tik jou persoonlike boodskap hier...</string>
+    <string name="send_whatsapp">Begin Lewendige Nasporing</string>
+    <string name="back_button_desc">Terug Knoppie</string>
+    <string name="logo_desc">SHEGuard-logo</string>
+    <string name="sign_in">Meld Aan</string>
+    <string name="already_have_an_account">Het jy reeds ’n rekening?</string>
+    <string name="sign_up">Registreer</string>
+    <string name="confirm_password">Bevestig Wagwoord</string>
+    <string name="password">Wagwoord</string>
+    <string name="date_of_birth">Geboortedatum</string>
+    <string name="email">E-pos</string>
+    <string name="full_name">Volle Naam</string>
+    <string name="slogan">Sluit aan by duisende vroue wat beheer oor hul veiligheid neem</string>
+    <string name="create_your_shield">Skep Jou Skild</string>
+    <string name="sheguard">SHEGuard</string>
+    <string name="volume_button_service_description">Bespeur volumeknoppie-drukke vir paniekopname.</string>
+    <string name="accessibility_service_description">SHEGuard Nooddiens - Bespeur volumeknoppie-drukke vir noodsituasies. Hierdie diens help om veiligheidsfunksies te voorsien deur spesifieke sleutel kombinasies te monitor.</string>
+    <string name="secure_vault">Veilige Kluis</string>
+    <string name="all_files">Alle Lêers</string>
+    <string name="upload_files">Laai Lêers Op</string>
+    <string name="no_files_found">Geen lêers gevind nie</string>
+    <string name="file_deleted">Lêer suksesvol geskrap</string>
+    <string name="file_upload_success">Lêers suksesvol opgelaai</string>
+    <string name="file_upload_failed">Oplaai het misluk</string>
+    <string name="permission_denied">Toestemming geweier</string>
+    <string name="no_user_signed_in">Meld asseblief aan om toegang tot die kluis te kry</string>
+    <string name="error_loading_files">Fout met laai van lêers</string>
+    <string name="cannot_open_file">Kan nie lêer oopmaak nie</string>
+    <string name="cannot_get_download_url">Kan nie aflaai-URL kry nie</string>
+    <string name="profile_icon_desc">Profiel-ikoon</string>
+    <string name="main_heading">Jou Skild, Jou Krag</string>
+    <string name="subtitle">SHEGuard waak oor jou</string>
+    <string name="panic_button_desc">Panieknoppie</string>
+    <string name="hold_to_activate">Hou vir 3 sekondes om te aktiveer •\nJou skild is gereed</string>
+    <string name="secure_vault_desc">Stoor bewyse en belangrike dokumente veilig</string>
+    <string name="shetrack">SHETrack</string>
+    <string name="shetrack_desc">Deel jou ligging in reële tyd met vertroude kontakte</string>
+    <string name="reset_password_title">Stel jou wagwoord terug</string>
+    <string name="forgot_password_body">Het jy jou wagwoord vergeet? Voer jou e-pos in om ’n OTP-PIN te ontvang.</string>
+    <string name="hint_enter_email">Voer e-pos in</string>
+    <string name="reset_password_button">Stel wagwoord terug</string>
+    <string name="remember_password_prompt">Onthou jy jou wagwoord?</string>
+    <string name="get_started_slogan">Jou Veiligheid, Jou\nKrag</string>
+    <string name="get_started_description">Bemagtig Suid-Afrikaanse vroue met diskrete beskerming, ondersteuning en hulpbronne wanneer jy dit die nodigste het.</string>
+    <string name="get_started_button">Begin Nou!</string>
+    <string name="live_tracking_title">Lewendige Nasporing</string>
+    <string name="session_label">Sessie: %1$s</string>
+    <string name="status_live_active">🟢 Lewendige nasporing aktief</string>
+    <string name="last_update_label">Laaste bywerking: %1$s</string>
+    <string name="share_current_location">Deel Huidige Ligging</string>
+    <string name="stop_tracking">Stop Nasporing</string>
+    <string name="welcome_back_title">Hallo, welkom terug!</string>
+    <string name="login_subtitle">Jou Skild, Jou Krag, Jou Stem</string>
+    <string name="biometric_title">Vinnige &amp; Veilige Toegang</string>
+    <string name="biometric_subtitle">Gebruik vingerafdruk of gesigsontsluiting</string>
+    <string name="or_label">OF</string>
+    <string name="forgot_password_question">Wagwoord vergeet?</string>
+    <string name="dont_have_account_prompt">Het jy nie ’n rekening nie?\u00A0</string>
+    <string name="create_new_password_title">Skep Nuwe Wagwoord</string>
+    <string name="password_requirements_title">Wagwoordvereistes:</string>
+    <string name="req_min_chars">• Minstens 8 karakters lank</string>
+    <string name="req_upper_lower">• Sluit hoof- en kleinletters in</string>
+    <string name="req_number">• Sluit ten minste een syfer in</string>
+    <string name="req_special_char">• Sluit ten minste een spesiale karakter in</string>
+    <string name="done">Klaar</string>
+    <string name="privacy_policy_title">Privaatheidsbeleid</string>
+    <string name="privacy_policy_icon_desc">Ikoon vir Privaatheidsbeleid</string>
+    <string name="policy_header_title">Privaatheidsbeleid &amp; Bepalings</string>
+    <string name="policy_header_subtitle">Jou privaatheid en databeskerming</string>
+    <string name="privacy_section_title">🔒 Privaatheidsbeleid</string>
+    <string name="effective_date_label">Inwerkingtredingsdatum: %1$s</string>
+    <string name="policy_intro">SHEGuard heg groot waarde aan jou privaatheid en is verbind daartoe om jou persoonlike inligting te beskerm. Hierdie Privaatheidsbeleid verduidelik hoe ons inligting versamel, gebruik, stoor en deel wanneer jy die SHEGuard-mobiele toepassing gebruik.</string>
+    <string name="info_collect_title">1. Inligting wat ons versamel</string>
+    <string name="info_collect_list">• Persoonlike inligting: Naam, van, e-posadres, geboortedatum en wagwoord\n• Noodkontakte: Selfoonnommers vir die panieknoppie-funksie\n• Liggingdata: Reële-tyd GPS-ligging wanneer die panieknoppie of SheTrack gebruik word\n• Kluisinhoud: Foto’s of dokumente (geënkripteer en privaat vir jou)\n• App-gebruiksdata: Toesteltipe, app-weergawe en valverslae</string>
+    <string name="how_use_title">2. Hoe ons jou inligting gebruik</string>
+    <string name="how_use_list">• Aktiveer app-funksies (panieknoppie-SMS, SheTrack-WhatsApp-opdaterings, fotokluis)\n• Verskaf rekeningdienste, insluitend aanmelding en skrapping van die rekening\n• Verhoog veiligheid deur ligging met gekose kontakte te deel tydens noodgevalle\n• Verbeter app-prestasie en funksionaliteit\n• Kommunikeer opdaterings of beleidveranderings</string>
+    <string name="sharing_title">3. Deling van inligting</string>
+    <string name="sharing_body">Ons verkoop nie jou persoonlike inligting nie. Ons deel dit slegs:\n• Met jou gekose noodkontakte wanneer jy die panieknoppie of SheTrack aktiveer\n• Met diensverskaffers (SMS of liggingdienste) uitsluitlik om funksies te aktiveer\n• Indien deur die wet vereis of om gebruikersveiligheid te beskerm</string>
+    <string name="security_title">4. Datastoor en Sekuriteit</string>
+    <string name="security_list">• Jou rekening- en kluisdata word met enkripsie beskerm\n• Ons gebruik bedryfstandaard-beskermingsmaatreëls om ongemagtigde toegang te voorkom\n• Jy kan jou rekening en gestoorde data permanent skrap in Instellings</string>
+    <string name="rights_title">5. Jou Regte</string>
+    <string name="rights_list">Jy het die reg om:\n• Jou inligting te bekom, by te werk of te skrap\n• Toestemming vir liggingdeling terug te trek\n• ’n Afskrif van die data te versoek wat ons oor jou hou</string>
+    <string name="terms_title">📋 Diensbepalings</string>
+    <string name="terms_intro">Deur SHEGuard te gebruik, stem jy in tot die volgende diensbepalings.</string>
+    <string name="use_app_title">1. Gebruik van die App</string>
+    <string name="use_app_list">• Jy stem in om SHEGuard slegs vir wettige doeleindes en veiligheidsfunksies te gebruik\n• Jy is verantwoordelik om jou aanmeldbesonderhede veilig te hou\n• Jy moet akkurate inligting verskaf wanneer jy registreer</string>
+    <string name="safety_features_title">2. Veiligheidsfunksies</string>
+    <string name="safety_features_list">• Die panieknoppie stuur SMS-waarskuwings en lewendige ligging na jou gekose kontakte\n• SheTrack deel jou ligging via WhatsApp wanneer dit geaktiveer is\n• Ons is nie verantwoordelik indien waarskuwings faal as gevolg van swak konnektiwiteit of toestelprobleme nie</string>
+    <string name="liability_title">3. Beperkings van Aanspreeklikheid</string>
+    <string name="liability_list">• SHEGuard bied hulpmiddels om veiligheid te verbeter maar kan nie die voorkoming van skade waarborg nie\n• Ons is nie aanspreeklik vir netwerkfoute, SMS/WhatsApp-afleweringsprobleme of app-mislukkings nie\n• Hierdie Bepalings word deur die wette van Suid-Afrika beheer</string>
+    <string name="contact_title">📞 Kontak Ons</string>
+    <string name="contact_intro">As jy vrae of bekommernisse oor hierdie beleid het:</string>
+    <string name="contact_details">E-pos: support@sheguard.co.za\nWebwerf: www.sheguard.co.za</string>
+    <string name="profile_avatar_desc">Profiel-avatar</string>
+    <string name="manage_profile_title">Bestuur jou profiel</string>
+    <string name="manage_profile_subtitle">Werk jou persoonlike inligting by</string>
+    <string name="first_name_label">Naam</string>
+    <string name="hint_first_name">Voer jou naam in</string>
+    <string name="last_name_label">Van</string>
+    <string name="hint_last_name">Voer jou van in</string>
+    <string name="email_address_label">E-posadres</string>
+    <string name="hint_enter_email_address">Voer jou e-posadres in</string>
+    <string name="phone_number_optional_label">Telefoonnommer (Opsioneel)</string>
+    <string name="hint_enter_phone_number">Voer jou telefoonnommer in</string>
+    <string name="dob_optional_label">Geboortedatum (Opsioneel)</string>
+    <string name="dob_hint">DD/MM/JJJJ</string>
+    <string name="save_changes">Stoor Veranderings</string>
+    <string name="privacy_notice_title">Kennisgewing oor Privaatheid</string>
+    <string name="privacy_notice_body">Jou persoonlike inligting word geënkripteer en veilig gestoor. Hierdie inligting word slegs gebruik om jou SHEGuard-ervaring en noodfunksies te personaliseer.</string>
+    <string name="vault_icon_desc">Kluis-slot ikoon</string>
+    <string name="secure_vault_title">Veilige Kluis</string>
+    <string name="secure_vault_subtitle">Verifikasie word vereis om toegang tot jou kluis te kry</string>
+    <string name="evidence_vault_title">Jou Bewyskluis</string>
+    <string name="evidence_vault_subtitle">Geënkripteerde en veilige berging vir belangrike lêers</string>
+    <string name="total_files_label">Totale lêers</string>
+    <string name="photos_label">Fotos</string>
+    <string name="videos_label">Videos</string>
+    <string name="others_label">Ander</string>
+    <string name="zero">0</string>
+    <string name="upload_to_vault">Laai na Kluis op</string>
+    <string name="add_evidence">Voeg Bewyse By</string>
+    <string name="audio_label">Oudio</string>
+    <string name="documents_label">Dokumente</string>
+    <string name="files_count_zero">0 lêers</string>
+    <string name="recent_files">Onlangse Lêers</string>
+    <string name="view_all">Wys Alles</string>
+    <string name="filter_all">Alles</string>
+    <string name="filter_all_with_count">Alles (%1$d)</string>
+    <string name="add_files">Voeg Lêers By</string>
+    <string name="settings_logo_desc">SHEGuard-instellingslogo</string>
+    <string name="manage_account_title">Bestuur jou rekening</string>
+    <string name="manage_account_subtitle">Pas jou SHEGuard-ervaring aan</string>
+    <string name="change_password_subtitle">Werk jou sekuriteitsinligting by</string>
+    <string name="change_language_subtitle">Kies jou voorkeurtaal</string>
+    <string name="policy_and_terms_subtitle">Privaatheidsbeleid en diensbepalings</string>
+    <string name="delete_account_subtitle">Skrap jou rekening permanent</string>
+    <string name="shecare_logo_desc">SHECare-logo</string>
+    <string name="gbv_support_title">Ondersteuning vir Geslagsgebaseerde Geweld</string>
+    <string name="gbv_support_subtitle">Inligting, hulpbronne en ondersteuning vir oorlewendes</string>
+    <string name="emergency_contacts_heading">🚨 Noodkontakte</string>
+    <string name="tears_icon_desc">TEARS-noodlyn ikoon</string>
+    <string name="tears_hotline_title">TEARS-noodlyn - 24/7</string>
+    <string name="tears_hotline_number">08000 TEARS (83277)</string>
+    <string name="police_icon_desc">Polisie-ikoon</string>
+    <string name="emergency_police_title">Noodpolisie</string>
+    <string name="emergency_police_number">10111</string>
+    <string name="support_locator_icon_desc">Ondersteunings-soeker ikoon</string>
+    <string name="support_locator_title">Ondersteuningssoeker</string>
+    <string name="support_locator_ussd">*134*7355#</string>
+    <string name="essential_info_heading">📚 Noodsaaklike Inligting</string>
+    <string name="dv_understanding_title">Begrip van Huisgeweld</string>
+    <string name="dv_understanding_body">Huisgeweld sluit in fisieke aggressie, seksuele mishandeling, emosionele mishandeling, beheerk gedrag, intimidasie, bekruiping en ekonomiese ontneem deur intieme vennote.</string>
+    <string name="first_response_title">Gids vir Eerste Reaksie</string>
+    <string name="first_response_body">Bly lewendig en kom op ’n veilige plek. Kontak ’n vertroude vriend of familielid. Soek binne 72 uur mediese hulp indien nodig vir ARV’s en PEP-medikasie.</string>
+    <string name="reporting_to_police_title">Aangifte by die Polisie</string>
+    <string name="reporting_to_police_body">Ken jou regte: privaat kamer, vroulike beampte, jou eie taal, ondersteuningspersoon teenwoordig. Kry afskrifte van verklarings en saakbesonderhede. Aangifte help om toekomstige voorvalle te voorkom.</string>
+    <string name="support_podcasts_heading">🎧 Ondersteuningspodsendings</string>
+    <string name="podcast1_desc">GBV en emosionele mishandeling podsending-omslag</string>
+    <string name="podcast1_title">GBV en Emosionele Mishandeling</string>
+    <string name="podcast2_desc">GBV in hoër onderwys podsending-omslag</string>
+    <string name="podcast2_title">GBV in Hoër Onderwys</string>
+    <string name="podcast3_desc">Geen geweld teen vroue meer podsending-omslag</string>
+    <string name="podcast3_title">Geen Geweld Teen Vroue Meer</string>
+    <string name="educational_videos_heading">📹 Opvoedkundige Videos</string>
+    <string name="video1_thumb_desc">Ondersteuningshulpbronne video-duimnael</string>
+    <string name="video1_play_desc">Speel Video 1</string>
+    <string name="video2_thumb_desc">Ondersteuningshulpbronne video-duimnael</string>
+    <string name="video2_play_desc">Speel Video 2</string>
+    <string name="video3_thumb_desc">Vind ondersteuning video-duimnael</string>
+    <string name="video3_play_desc">Speel Video 3</string>
+    <string name="video_support_resources">Ondersteuningshulpbronne</string>
+    <string name="video_gbv_finding_support">GBV en Hoe om Ondersteuning te Vind</string>
+    <string name="remember_heading">💜 Onthou</string>
+    <string name="not_alone_title">Jy is nie alleen nie</string>
+    <string name="not_alone_bullets">• Niemand behoort traumatiese gebeure alleen te hanteer nie\n• Jou lewe en welstand maak saak\n• Ondersteuning is 24/7 beskikbaar\n• Herstel is moontlik met die regte hulp\n• Jy het die reg om veilig en gerespekteer te wees</string>
+    <string name="immediate_help_footer">Vir onmiddellike hulp, skakel die noodnommers hierbo</string>
+    <string name="shetrack_title">SHETrack</string>
+    <string name="live_ready_title">Gereed om te volg - Tik om lewendige ligging te sien</string>
+    <string name="live_ready_subtitle">Deel jou ligging en bly verbind met vertroude kontakte</string>
+    <string name="start_event_tracking">Begin nuwe gebeurtenisnasporing</string>
+    <string name="safety_network_title">Jou Veiligheidsnetwerk</string>
+    <string name="safety_network_body">Volg jou gebeurtenisse en hou jou vertroude kontakte op hoogte van waar jy is vir maksimum veiligheid.</string>
+    <string name="contact_name_hint">Kontaknaam</string>
+    <string name="contact_phone_hint">Telefoonnommer</string>
+    <string name="delete_account_title">Skrap Rekening</string>
+    <string name="delete_account_message">Is jy seker jy wil jou rekening permanent uitvee?</string>
+    <string name="delete_account_warning">Hierdie aksie kan nie ongedaan gemaak word nie en al jou data sal verlore gaan.</string>
+    <string name="cancel_button">KANSELEER</string>
+    <string name="delete_button">SKRAP</string>
+    <string name="select_language_title">Kies Taal</string>
+    <string name="lang_english">Engels</string>
+    <string name="lang_afrikaans">Afrikaans</string>
+    <string name="lang_zulu">isiZulu</string>
+    <string name="lang_xhosa">isiXhosa</string>
+    <string name="cancel_button2">Kanseleer</string>
+    <string name="apply_button">Pas toe</string>
+    <string name="file_thumb_desc">Lêer-duimnael</string>
+    <string name="file_type_label">Lêertipe</string>
+    <string name="upload_time_label">Oplaaityd</string>
+    <string name="file_name_placeholder">Lêernaam</string>
+    <string name="delete">Skrap</string>
+    <string name="download">Aflaai</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</resources>

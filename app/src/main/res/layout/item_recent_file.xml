@@ -8,13 +8,11 @@
     android:padding="12dp"
     android:gravity="center">
 
-
     <ImageView
         android:id="@+id/thumbnailImageView"
         android:layout_width="48dp"
         android:layout_height="48dp"
-
-        android:contentDescription="File Thumbnail"
+        android:contentDescription="@string/file_thumb_desc"
         android:scaleType="centerInside"
         android:background="@drawable/button_background"
         android:padding="8dp"
@@ -24,7 +22,7 @@
         android:id="@+id/fileTypeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="File Type"
+        android:text="@string/file_type_label"
         android:textStyle="bold"
         android:textColor="#FFFFFF"
         android:textSize="12sp"
@@ -35,7 +33,7 @@
         android:id="@+id/uploadTimeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Upload Time"
+        android:text="@string/upload_time_label"
         android:textColor="#E1BEE7"
         android:textSize="10sp"
         android:gravity="center"
@@ -43,4 +41,3 @@
         android:ellipsize="end"/>
 
 </LinearLayout>
-

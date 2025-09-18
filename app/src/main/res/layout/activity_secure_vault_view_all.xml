@@ -8,7 +8,6 @@
     android:background="@drawable/purple_gradient_background"
     tools:context=".ui.SecureVaultViewAll">
 
-
     <LinearLayout
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
@@ -18,7 +17,6 @@
         android:background="@android:color/white"
         android:paddingHorizontal="20dp"
         android:paddingTop="24dp">
-
 
         <ImageButton
             android:id="@+id/back_button"
@@ -32,7 +30,6 @@
             android:scaleType="fitCenter"
             android:src="@drawable/left_arrow"
             tools:ignore="TouchTargetSizeCheck" />
-
 
         <LinearLayout
             android:layout_width="0dp"
@@ -53,17 +50,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="All Files"
+                android:text="@string/all_files"
                 android:textColor="#6A1B9A"
                 android:textSize="20sp"
                 android:textStyle="bold" />
-
         </LinearLayout>
-
     </LinearLayout>
-
-
-
 
     <LinearLayout
         android:id="@+id/filter_section"
@@ -75,7 +67,6 @@
         android:orientation="vertical"
         android:paddingHorizontal="20dp"
         android:paddingVertical="16dp">
-
 
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -89,7 +80,6 @@
                 android:orientation="horizontal"
                 android:paddingVertical="8dp">
 
-
                 <Button
                     android:id="@+id/filter_all_button"
                     style="?android:attr/borderlessButtonStyle"
@@ -99,13 +89,13 @@
                     android:background="@drawable/logo_background"
                     android:minWidth="0dp"
                     android:paddingHorizontal="16dp"
-                    android:text="All (12)"
+                    android:text='@string/filter_all_with_count'
+                    tools:text="All (12)"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     tools:ignore="TouchTargetSizeCheck" />
-
 
                 <Button
                     android:id="@+id/filter_photos_button"
@@ -116,12 +106,11 @@
                     android:background="@drawable/filter_button_background"
                     android:minWidth="0dp"
                     android:paddingHorizontal="16dp"
-                    android:text=" Photos "
+                    android:text='@string/photos_label'
                     android:textAllCaps="false"
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     tools:ignore="TouchTargetSizeCheck" />
-
 
                 <Button
                     android:id="@+id/filter_videos_button"
@@ -132,12 +121,11 @@
                     android:background="@drawable/filter_button_background"
                     android:minWidth="0dp"
                     android:paddingHorizontal="16dp"
-                    android:text=" Videos "
+                    android:text='@string/videos_label'
                     android:textAllCaps="false"
                     android:textColor="#E1BEE7"
                     android:textSize="12sp"
                     tools:ignore="TouchTargetSizeCheck" />
-
 
                 <Button
                     android:id="@+id/filter_audio_button"
@@ -148,12 +136,11 @@
                     android:background="@drawable/filter_button_background"
                     android:minWidth="0dp"
                     android:paddingHorizontal="16dp"
-                    android:text=" Audio "
+                    android:text='@string/audio_label'
                     android:textAllCaps="false"
                     android:textColor="#E1BEE7"
                     android:textSize="12sp"
                     tools:ignore="TouchTargetSizeCheck" />
-
 
                 <Button
                     android:id="@+id/filter_documents_button"
@@ -163,16 +150,13 @@
                     android:background="@drawable/filter_button_background"
                     android:minWidth="0dp"
                     android:paddingHorizontal="16dp"
-                    android:text=" Documents "
+                    android:text='@string/documents_label'
                     android:textAllCaps="false"
                     android:textColor="#E1BEE7"
                     android:textSize="12sp"
                     tools:ignore="TouchTargetSizeCheck" />
-
             </LinearLayout>
-
         </HorizontalScrollView>
-
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -187,7 +171,6 @@
         android:clipToPadding="false"
         android:scrollbars="vertical" />
 
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_file_fab"
         android:layout_width="wrap_content"
@@ -196,7 +179,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="36dp"
-        android:contentDescription="Add Files"
+        android:contentDescription='@string/add_files'
         android:src="@drawable/add_sign"
         app:backgroundTint="#FF7043"
         app:borderWidth="0dp"
@@ -204,5 +187,4 @@
         app:fabSize="normal"
         app:pressedTranslationZ="12dp"
         app:tint="#FFFFFF" />
-
 </RelativeLayout>

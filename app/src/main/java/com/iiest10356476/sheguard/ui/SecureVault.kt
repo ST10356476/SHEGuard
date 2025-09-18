@@ -33,7 +33,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.tasks.await
 
-class SecureVault : AppCompatActivity() {
+class SecureVault :  BaseActivity() {
 
     companion object {
         private const val TAG = "SecureVault"

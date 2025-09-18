@@ -12,7 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.iiest10356476.sheguard.R
 import com.iiest10356476.sheguard.services.LiveLocationTracker
 
-class TrackingEventActivity : AppCompatActivity() {
+class TrackingEventActivity :  BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -50,6 +50,7 @@ class TrackingEventActivity : AppCompatActivity() {
 
     private fun setupBottomNavigation() {
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigation.itemIconTintList = null
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
@@ -68,15 +69,13 @@ class TrackingEventActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_community -> {
-                    // Navigate to Community activity
-                    // val intent = Intent(this, CommunityActivity::class.java)
-                    // startActivity(intent)
+                    val intent = Intent(this, SheCareActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 R.id.nav_settings -> {
-                    // Navigate to Settings activity
-                    // val intent = Intent(this, SettingsActivity::class.java)
-                    // startActivity(intent)
+                    val intent = Intent(this, SettingsActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 else -> false

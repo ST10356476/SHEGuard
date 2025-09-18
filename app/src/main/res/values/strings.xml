@@ -38,5 +38,209 @@
     <string name="error_loading_files">Error loading files</string>
     <string name="cannot_open_file">Cannot open file</string>
     <string name="cannot_get_download_url">Cannot get download URL</string>
+    <string name="settings">Settings</string>
+    <string name="my_profile">My Profile</string>
+    <string name="change_language">Change Language</string>
+    <string name="change_password">Change Password</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="she_care">SHECare</string>
+    <string name="select_language">Select Language</string>
+    <string name="apply">Apply</string>
+    <string name="english">English</string>
+    <string name="afrikaans">Afrikaans</string>
+    <string name="isizulu">isiZulu</string>
+    <string name="isixhosa">isiXhosa</string>
+    <string name="profile_icon_desc">Profile icon</string>
+    <string name="main_heading">Your Shield, Your Strength</string>
+    <string name="subtitle">SHEGuard is watching over you</string>
+    <string name="panic_button_desc">Panic Button</string>
+    <string name="hold_to_activate">Hold for 3 seconds to activate •\nYour shield is ready</string>
+    <string name="secure_vault_desc">Store evidence and important documents safely</string>
+    <string name="shetrack">SHETrack</string>
+    <string name="shetrack_desc">Share your real-time location with trusted contacts</string>
+    <string name="reset_password_title">Reset your password</string>
+    <string name="forgot_password_body">Forgot your password? Enter your email to receive an OTP PIN.</string>
+    <string name="hint_enter_email">Enter Email</string>
+    <string name="reset_password_button">Reset Password</string>
+    <string name="remember_password_prompt">Remember your password?</string>
+    <string name="get_started_slogan">Your Safety, Your\nPower</string>
+    <string name="get_started_description">Empowering South African women with discreet protection, support, and resources when you need them most.</string>
+    <string name="get_started_button">Get Started!</string>
+    <string name="live_tracking_title">Live Tracking</string>
+    <string name="session_label">Session: %1$s</string>
+    <string name="status_live_active">🟢 Live Tracking Active</string>
+    <string name="last_update_label">Last update: %1$s</string>
+    <string name="share_current_location">Share Current Location</string>
+    <string name="stop_tracking">Stop Tracking</string>
+    <string name="welcome_back_title">Hi Welcome Back!</string>
+    <string name="login_subtitle">Your Shield, Your Strength, Your Voice</string>
+    <string name="biometric_title">Quick &amp; Secure Access</string>
+    <string name="biometric_subtitle">Use fingerprint or face unlock</string>
+    <string name="or_label">OR</string>
+    <string name="forgot_password_question">Forgot password?</string>
+    <string name="dont_have_account_prompt">Don&#160;t have an account?\u00A0</string>
+    <string name="create_new_password_title">Create New Password</string>
+    <string name="password_requirements_title">Password Requirements:</string>
+    <string name="req_min_chars">• At least 8 characters long</string>
+    <string name="req_upper_lower">• Include uppercase and lowercase letters</string>
+    <string name="req_number">• Include at least one number</string>
+    <string name="req_special_char">• Include at least one special character</string>
+    <string name="privacy_policy_title">Privacy Policy</string>
+    <string name="privacy_policy_icon_desc">Privacy Policy Icon</string>
+    <string name="policy_header_title">Privacy Policy &amp; Terms</string>
+    <string name="policy_header_subtitle">Your privacy and data protection</string>
+    <string name="privacy_section_title">🔒 Privacy Policy</string>
+    <string name="effective_date_label">Effective Date: %1$s</string>
+    <string name="policy_intro">SHEGuard values your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, store, and share information when you use the SHEGuard mobile application.</string>
+    <string name="info_collect_title">1. Information We Collect</string>
+    <string name="info_collect_list">• Personal Information: Name, surname, email address, date of birth, and password\n• Emergency Contacts: Phone numbers for the panic button feature\n• Location Data: Real-time GPS location when using panic button or SheTrack\n• Vault Content: Photos or documents (encrypted and private to you)\n• App Usage Data: Device type, app version, and crash reports</string>
+    <string name="how_use_title">2. How We Use Your Information</string>
+    <string name="how_use_list">• Enable app features (panic button SMS, SheTrack WhatsApp updates, photo vault)\n• Provide account services, including sign-in and account deletion\n• Enhance safety by sharing location with chosen contacts during emergencies\n• Improve app performance and functionality\n• Communicate updates or policy changes</string>
+    <string name="sharing_title">3. Sharing of Information</string>
+    <string name="sharing_body">We do not sell your personal information. We only share it:\n• With your chosen emergency contacts when you trigger panic button or SheTrack\n• With service providers (SMS or location services) strictly to enable features\n• If required by law or to protect user safety</string>
+    <string name="security_title">4. Data Storage and Security</string>
+    <string name="security_list">• Your account and vault data are protected with encryption\n• We use industry-standard safeguards to prevent unauthorized access\n• You can permanently delete your account and stored data in Settings</string>
+    <string name="rights_title">5. Your Rights</string>
+    <string name="rights_list">You have the right to:\n• Access, update, or delete your information\n• Withdraw consent to location sharing\n• Request a copy of the data we hold about you</string>
+    <string name="terms_title">📋 Terms of Service</string>
+    <string name="terms_intro">By using SHEGuard, you agree to the following Terms of Service.</string>
+    <string name="use_app_title">1. Use of the App</string>
+    <string name="use_app_list">• You agree to use SHEGuard only for lawful purposes and safety features\n• You are responsible for keeping your login details secure\n• You must provide accurate information when signing up</string>
+    <string name="safety_features_title">2. Safety Features</string>
+    <string name="safety_features_list">• The panic button sends SMS alerts and live location to your chosen contacts\n• SheTrack shares your location via WhatsApp when activated\n• We are not responsible if alerts fail due to poor connectivity or device issues</string>
+    <string name="liability_title">3. Limitations of Liability</string>
+    <string name="liability_list">• SHEGuard provides tools to improve safety but cannot guarantee prevention of harm\n• We are not liable for network failures, SMS/WhatsApp delivery issues, or app malfunctions\n• These Terms are governed by the laws of South Africa</string>
+    <string name="contact_title">📞 Contact Us</string>
+    <string name="contact_intro">If you have questions or concerns about this policy:</string>
+    <string name="contact_details">Email: support@sheguard.co.za\nWebsite: www.sheguard.co.za</string>
+    <string name="done">Done</string>
+    <string name="profile_avatar_desc">Profile Avatar</string>
+    <string name="manage_profile_title">Manage Your Profile</string>
+    <string name="manage_profile_subtitle">Update your personal information</string>
+    <string name="first_name_label">First Name</string>
+    <string name="hint_first_name">Enter your first name</string>
+    <string name="last_name_label">Last Name</string>
+    <string name="hint_last_name">Enter your last name</string>
+    <string name="email_address_label">Email Address</string>
+    <string name="hint_enter_email_address">Enter your email address</string>
+    <string name="phone_number_optional_label">Phone Number (Optional)</string>
+    <string name="hint_enter_phone_number">Enter your phone number</string>
+    <string name="dob_optional_label">Date of Birth (Optional)</string>
+    <string name="dob_hint">DD/MM/YYYY</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="privacy_notice_title">Privacy Notice</string>
+    <string name="privacy_notice_body">Your personal information is encrypted and stored securely. This information is only used to personalize your SHEGuard experience and emergency features.</string>
+    <string name="vault_icon_desc">Vault lock icon</string>
+    <string name="secure_vault_title">Secure Vault</string>
+    <string name="secure_vault_subtitle">Authentication required to access your vault</string>
+    <string name="evidence_vault_title">Your Evidence Vault</string>
+    <string name="evidence_vault_subtitle">Encrypted and secure storage for important files</string>
+    <string name="total_files_label">Total Files</string>
+    <string name="photos_label">Photos</string>
+    <string name="videos_label">Videos</string>
+    <string name="others_label">Others</string>
+    <string name="zero">0</string>
+    <string name="upload_to_vault">Upload to Vault</string>
+    <string name="add_evidence">Add Evidence</string>
+    <string name="audio_label">Audio</string>
+    <string name="documents_label">Documents</string>
+    <string name="files_count_zero">0 files</string>
+    <string name="recent_files">Recent Files</string>
+    <string name="view_all">View All</string>
+    <string name="filter_all">All</string>
+    <string name="filter_all_with_count">All (%1$d)</string>
+    <string name="add_files">Add Files</string>
+    <string name="settings_logo_desc">SHEGuard Settings Logo</string>
+    <string name="manage_account_title">Manage Your Account</string>
+    <string name="manage_account_subtitle">Customize your SHEGuard experience</string>
+    <string name="change_password_subtitle">Update your security credentials</string>
+    <string name="change_language_subtitle">Select your preferred language</string>
+    <string name="policy_and_terms_subtitle">Privacy policy and terms of service</string>
+    <string name="delete_account_subtitle">Permanently delete your account</string>
+    <string name="shecare_logo_desc">SHECare logo</string>
+    <string name="gbv_support_title">Gender-Based Violence Support</string>
+    <string name="gbv_support_subtitle">Information, resources and support for survivors</string>
+    <string name="emergency_contacts_heading">🚨 Emergency Contacts</string>
+    <string name="tears_icon_desc">TEARS hotline icon</string>
+    <string name="tears_hotline_title">TEARS Hotline - 24/7</string>
+    <string name="tears_hotline_number">08000 TEARS (83277)</string>
+    <string name="police_icon_desc">Police icon</string>
+    <string name="emergency_police_title">Emergency Police</string>
+    <string name="emergency_police_number">10111</string>
+    <string name="support_locator_icon_desc">Support locator icon</string>
+    <string name="support_locator_title">Support Locator</string>
+    <string name="support_locator_ussd">*134*7355#</string>
+    <string name="essential_info_heading">📚 Essential Information</string>
+    <string name="dv_understanding_title">Understanding Domestic Violence</string>
+    <string name="dv_understanding_body">Domestic violence involves physical aggression, sexual abuse, emotional abuse, controlling behavior, intimidation, stalking, and economic deprivation by intimate partners.</string>
+    <string name="first_response_title">First Response Guide</string>
+    <string name="first_response_body">Stay alive and get to safety. Contact a trusted friend or family member. Seek medical attention within 72 hours if needed for ARVs and PEP medication.</string>
+    <string name="reporting_to_police_title">Reporting to Police</string>
+    <string name="reporting_to_police_body">Know your rights: private room, female officer, own language, support person present. Get statement copies and case details. Reporting helps prevent future attacks.</string>
+    <string name="support_podcasts_heading">🎧 Support Podcasts</string>
+    <string name="podcast1_desc">GBV and emotional abuse podcast cover</string>
+    <string name="podcast1_title">GBV And Emotional Abuse</string>
+    <string name="podcast2_desc">GBV in higher education podcast cover</string>
+    <string name="podcast2_title">GBV in Higher Education</string>
+    <string name="podcast3_desc">No more violence against women podcast cover</string>
+    <string name="podcast3_title">No More Violence Against Women</string>
+    <string name="educational_videos_heading">📹 Educational Videos</string>
+    <string name="video1_thumb_desc">Support resources video thumbnail</string>
+    <string name="video1_play_desc">Play Video 1</string>
+    <string name="video2_thumb_desc">Support resources video thumbnail</string>
+    <string name="video2_play_desc">Play Video 2</string>
+    <string name="video3_thumb_desc">Finding support video thumbnail</string>
+    <string name="video3_play_desc">Play Video 3</string>
+    <string name="video_support_resources">Support Resources</string>
+    <string name="video_gbv_finding_support">GBV and Finding Support</string>
+    <string name="remember_heading">💜 Remember</string>
+    <string name="not_alone_title">You Are Not Alone</string>
+    <string name="not_alone_bullets">• Nobody should face traumatic events alone\n• Your life and wellbeing matter\n• Support is available 24/7\n• Recovery is possible with the right help\n• You have the right to be safe and respected</string>
+    <string name="immediate_help_footer">For immediate help, call the emergency numbers above</string>
+    <string name="shetrack_title">SHETrack</string>
+    <string name="live_ready_title">Ready to Track - Click to view live location</string>
+    <string name="live_ready_subtitle">Share your location and stay connected with trusted contacts</string>
+    <string name="start_event_tracking">Start New Event Tracking</string>
+    <string name="safety_network_title">Your Safety Network</string>
+    <string name="safety_network_body">Track your events and keep your trusted contacts informed about your whereabouts for maximum safety.</string>
+    <string name="contact_name_hint">Contact Name</string>
+    <string name="contact_phone_hint">Phone Number</string>
+    <string name="delete_account_title">Delete Account</string>
+    <string name="delete_account_message">Are you sure you want to permanently delete your account?</string>
+    <string name="delete_account_warning">This action cannot be undone and all your data will be lost.</string>
+    <string name="cancel_button">CANCEL</string>
+    <string name="delete_button">DELETE</string>
+    <string name="select_language_title">Select Language</string>
+    <string name="lang_english">English</string>
+    <string name="lang_afrikaans">Afrikaans</string>
+    <string name="lang_zulu">isiZulu</string>
+    <string name="lang_xhosa">isiXhosa</string>
+    <string name="cancel_button2">Cancel</string>
+    <string name="apply_button">Apply</string>
+    <string name="file_thumb_desc">File thumbnail</string>
+    <string name="file_type_label">File Type</string>
+    <string name="upload_time_label">Upload Time</string>
+    <string name="file_name_placeholder">File Name</string>
+    <string name="delete">Delete</string>
+    <string name="download">Download</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </resources>
