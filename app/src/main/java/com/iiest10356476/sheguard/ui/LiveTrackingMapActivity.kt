@@ -35,7 +35,7 @@ import com.iiest10356476.sheguard.services.LiveLocationTracker
 import java.text.SimpleDateFormat
 import java.util.*
 
-class LiveTrackingMapActivity : AppCompatActivity(), OnMapReadyCallback {
+class LiveTrackingMapActivity :  BaseActivity(), OnMapReadyCallback {
 
     private lateinit var googleMap: GoogleMap
     private lateinit var sessionIdText: TextView

@@ -8,7 +8,6 @@
     android:background="@drawable/purple_gradient_background"
     tools:context=".ui.SecureVaultViewAll">
 
-
     <LinearLayout
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
@@ -18,7 +17,6 @@
         android:background="@android:color/white"
         android:paddingHorizontal="20dp"
         android:paddingTop="24dp">
-
 
         <ImageButton
             android:id="@+id/back_button"
@@ -33,7 +31,6 @@
             android:src="@drawable/left_arrow"
             tools:ignore="TouchTargetSizeCheck" />
 
-
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -46,21 +43,19 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/sheguard_logo"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:contentDescription="@string/logo_desc" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Secure Vault"
+                android:text="@string/secure_vault"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="#6A1B9A" />
-
         </LinearLayout>
-
     </LinearLayout>
-
 
     <ScrollView
         android:layout_width="match_parent"
@@ -78,7 +73,6 @@
             android:paddingTop="24dp"
             android:paddingBottom="40dp">
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,7 +80,6 @@
                 android:background="@drawable/purple_gradient_background"
                 android:padding="20dp"
                 android:layout_marginBottom="24dp">
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -101,7 +94,8 @@
                         android:src="@drawable/lock"
                         android:background="@drawable/button_background"
                         android:padding="12dp"
-                        android:scaleType="fitCenter" />
+                        android:scaleType="fitCenter"
+                        android:contentDescription="@string/vault_icon_desc" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -112,7 +106,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Your Evidence Vault"
+                            android:text="@string/evidence_vault_title"
                             android:textSize="18sp"
                             android:textStyle="bold"
                             android:textColor="#FFFFFF" />
@@ -120,22 +114,18 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Encrypted and secure storage for important files"
+                            android:text="@string/evidence_vault_subtitle"
                             android:textSize="12sp"
                             android:textColor="#E1BEE7"
                             android:layout_marginTop="4dp" />
-
                     </LinearLayout>
-
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:weightSum="4">
-
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -149,7 +139,8 @@
                             android:id="@+id/total_files_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0"
+                            android:text="@string/zero"
+                            tools:text="0"
                             android:textSize="24sp"
                             android:textStyle="bold"
                             android:textColor="#FFD700" />
@@ -157,13 +148,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Total Files"
+                            android:text="@string/total_files_label"
                             android:textSize="10sp"
                             android:textColor="#E1BEE7"
                             android:gravity="center" />
-
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -177,7 +166,8 @@
                             android:id="@+id/photos_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0"
+                            android:text="@string/zero"
+                            tools:text="0"
                             android:textSize="24sp"
                             android:textStyle="bold"
                             android:textColor="#FFD700" />
@@ -185,13 +175,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Photos"
+                            android:text="@string/photos_label"
                             android:textSize="10sp"
                             android:textColor="#E1BEE7"
                             android:gravity="center" />
-
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -205,7 +193,8 @@
                             android:id="@+id/videos_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0"
+                            android:text="@string/zero"
+                            tools:text="0"
                             android:textSize="24sp"
                             android:textStyle="bold"
                             android:textColor="#FFD700" />
@@ -213,13 +202,11 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Videos"
+                            android:text="@string/videos_label"
                             android:textSize="10sp"
                             android:textColor="#E1BEE7"
                             android:gravity="center" />
-
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -233,7 +220,8 @@
                             android:id="@+id/others_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0"
+                            android:text="@string/zero"
+                            tools:text="0"
                             android:textSize="24sp"
                             android:textStyle="bold"
                             android:textColor="#FFD700" />
@@ -241,17 +229,13 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Others"
+                            android:text="@string/others_label"
                             android:textSize="10sp"
                             android:textColor="#E1BEE7"
                             android:gravity="center" />
-
                     </LinearLayout>
-
                 </LinearLayout>
-
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -265,22 +249,20 @@
                     android:id="@+id/upload_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Upload to Vault"
+                    android:text="@string/upload_to_vault"
                     android:layout_gravity="center_horizontal"
                     android:padding="12dp"
                     android:backgroundTint="@color/ic_launcher_background"
                     android:textColor="@color/black"/>
 
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Add Evidence"
+                    android:text="@string/add_evidence"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="#FFFFFF"
                     android:layout_marginBottom="16dp" />
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -288,7 +270,6 @@
                     android:orientation="horizontal"
                     android:weightSum="2"
                     android:layout_marginBottom="16dp">
-
 
                     <LinearLayout
                         android:id="@+id/add_photos_button"
@@ -320,7 +301,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Photos"
+                                android:text="@string/photos_label"
                                 android:textSize="14sp"
                                 android:textStyle="bold"
                                 android:textColor="#FFFFFF" />
@@ -329,15 +310,13 @@
                                 android:id="@+id/photos_files_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="0 files"
+                                android:text="@string/files_count_zero"
+                                tools:text="0 files"
                                 android:textSize="10sp"
                                 android:textColor="#E1BEE7"
                                 android:layout_marginTop="2dp" />
-
                         </LinearLayout>
-
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:id="@+id/add_videos_button"
@@ -369,7 +348,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Videos"
+                                android:text="@string/videos_label"
                                 android:textSize="14sp"
                                 android:textStyle="bold"
                                 android:textColor="#FFFFFF" />
@@ -378,15 +357,13 @@
                                 android:id="@+id/videos_files_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="0 files"
+                                android:text="@string/files_count_zero"
+                                tools:text="0 files"
                                 android:textSize="10sp"
                                 android:textColor="#E1BEE7"
                                 android:layout_marginTop="2dp" />
-
                         </LinearLayout>
-
                     </LinearLayout>
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -394,7 +371,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:weightSum="2">
-
 
                     <LinearLayout
                         android:id="@+id/add_audio_button"
@@ -426,7 +402,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Audio"
+                                android:text="@string/audio_label"
                                 android:textSize="14sp"
                                 android:textStyle="bold"
                                 android:textColor="#FFFFFF" />
@@ -435,15 +411,13 @@
                                 android:id="@+id/audio_files_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="0 files"
+                                android:text="@string/files_count_zero"
+                                tools:text="0 files"
                                 android:textSize="10sp"
                                 android:textColor="#E1BEE7"
                                 android:layout_marginTop="2dp" />
-
                         </LinearLayout>
-
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:id="@+id/add_documents_button"
@@ -475,7 +449,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Documents"
+                                android:text="@string/documents_label"
                                 android:textSize="14sp"
                                 android:textStyle="bold"
                                 android:textColor="#FFFFFF" />
@@ -484,19 +458,15 @@
                                 android:id="@+id/documents_files_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="0 files"
+                                android:text="@string/files_count_zero"
+                                tools:text="0 files"
                                 android:textSize="10sp"
                                 android:textColor="#E1BEE7"
                                 android:layout_marginTop="2dp" />
-
                         </LinearLayout>
-
                     </LinearLayout>
-
                 </LinearLayout>
-
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -504,7 +474,6 @@
                 android:orientation="vertical"
                 android:background="@drawable/purple_gradient_background"
                 android:padding="20dp">
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -517,7 +486,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Recent Files"
+                        android:text="@string/recent_files"
                         android:textSize="18sp"
                         android:textStyle="bold"
                         android:textColor="#FFFFFF" />
@@ -531,25 +500,19 @@
                         android:minWidth="0dp"
                         android:paddingHorizontal="12dp"
                         android:clickable="true"
-                        android:text="View All"
+                        android:text="@string/view_all"
                         android:textAllCaps="false"
                         android:textColor="#FFFFFF"
                         android:textSize="10sp"
                         tools:ignore="TouchTargetSizeCheck" />
-
                 </LinearLayout>
-
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recent_files_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:nestedScrollingEnabled="false" />
-
             </LinearLayout>
-
         </LinearLayout>
-
     </ScrollView>
-
 </RelativeLayout>

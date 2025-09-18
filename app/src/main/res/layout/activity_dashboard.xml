@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="SHEGuard"
+                android:text="@string/app_name"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="#6A1B9A" />
@@ -49,7 +49,7 @@
             android:focusable="true"
             android:padding="8dp"
             android:scaleType="fitCenter"
-            android:contentDescription="Profile icon"
+            android:contentDescription="@string/profile_icon_desc"
             android:src="@drawable/profile_icon" />
     </LinearLayout>
 
@@ -71,7 +71,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Your Shield, Your Strength"
+                android:text="@string/main_heading"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
@@ -82,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="SHEGuard is watching over you"
+                android:text="@string/subtitle"
                 android:textSize="16sp"
                 android:textColor="#E1BEE7"
                 android:gravity="center" />
@@ -97,7 +97,7 @@
                 android:elevation="8dp"
                 android:focusable="true"
                 android:gravity="center"
-                android:contentDescription="Panic Button"
+                android:contentDescription="@string/panic_button_desc"
                 android:orientation="vertical">
 
                 <ImageView
@@ -112,7 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Hold for 3 seconds to activate •\nYour shield is ready"
+                android:text="@string/hold_to_activate"
                 android:textSize="14sp"
                 android:textColor="@android:color/white"
                 android:gravity="center"
@@ -151,7 +151,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Secure Vault"
+                        android:text="@string/secure_vault"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         android:textColor="@android:color/white"
@@ -161,7 +161,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Store evidence and important documents safely"
+                        android:text="@string/secure_vault_desc"
                         android:textSize="10sp"
                         android:textColor="#E1BEE7"
                         android:gravity="center"
@@ -194,7 +194,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="SHETrack"
+                        android:text="@string/shetrack"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         android:textColor="@android:color/white"
@@ -204,7 +204,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Share your real-time location with trusted contacts"
+                        android:text="@string/shetrack_desc"
                         android:textSize="10sp"
                         android:textColor="#E1BEE7"
                         android:gravity="center"

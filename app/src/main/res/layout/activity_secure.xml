@@ -21,12 +21,13 @@
             android:background="@drawable/button_background"
             android:padding="16dp"
             android:scaleType="fitCenter"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginBottom="24dp"
+            android:contentDescription="@string/vault_icon_desc" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Secure Vault"
+            android:text="@string/secure_vault_title"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
@@ -35,7 +36,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Authentication required to access your vault"
+            android:text="@string/secure_vault_subtitle"
             android:textSize="14sp"
             android:textColor="#E1BEE7"
             android:gravity="center"

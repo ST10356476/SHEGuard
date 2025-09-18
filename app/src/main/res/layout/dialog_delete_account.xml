@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Delete Account"
+        android:text="@string/delete_account_title"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="#FF5252"
@@ -31,7 +31,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Are you sure you want to permanently delete your account?"
+        android:text="@string/delete_account_message"
         android:textSize="16sp"
         android:textColor="#FFFFFF"
         android:gravity="center"
@@ -41,7 +41,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="This action cannot be undone and all your data will be lost."
+        android:text="@string/delete_account_warning"
         android:textSize="14sp"
         android:textColor="#E1BEE7"
         android:gravity="center"
@@ -72,7 +72,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="CANCEL"
+                android:text="@string/cancel_button"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="#6A1B9A" />
@@ -95,7 +95,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DELETE"
+                android:text="@string/delete_button"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF" />

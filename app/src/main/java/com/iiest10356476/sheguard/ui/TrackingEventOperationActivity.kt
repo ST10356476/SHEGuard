@@ -27,7 +27,7 @@ import com.iiest10356476.sheguard.ui.utils.LocationAndWhatsAppHelper
 import com.iiest10356476.sheguard.utils.ContactsPreferencesHelper
 import java.util.UUID
 
-class TrackingEventOperationActivity : AppCompatActivity() {
+class TrackingEventOperationActivity :  BaseActivity() {
 
     private lateinit var contactsAdapter: EmergencyContactAdapter
     private lateinit var contactsRecyclerView: RecyclerView

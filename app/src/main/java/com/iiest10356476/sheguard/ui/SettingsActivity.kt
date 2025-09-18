@@ -1,17 +1,20 @@
 package com.iiest10356476.sheguard.ui
 
+import com.iiest10356476.sheguard.ui.auth.NewPasswordActivity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.ImageButton
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.OnBackPressedCallback
 import android.app.Dialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.iiest10356476.sheguard.R
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import com.iiest10356476.sheguard.utils.LanguageHelper
 
-class SettingsActivity : AppCompatActivity() {
+class SettingsActivity : BaseActivity() {
 
     // UI Components
     private lateinit var backButton: ImageButton
@@ -55,7 +58,6 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun setupClickListeners() {
-
         // Back button - return to previous screen
         backButton.setOnClickListener {
             finish()
@@ -63,48 +65,93 @@ class SettingsActivity : AppCompatActivity() {
 
         // Profile button
         profilesButton.setOnClickListener {
-            // TODO: Navigate to Profile Activity
-            // val intent = Intent(this, ProfileActivity::class.java)
-            // startActivity(intent)
-
-            // For now, show a placeholder message
-            showPlaceholderMessage("Profile")
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
         }
 
         // Change Password button
         passwordButton.setOnClickListener {
-            // TODO: Navigate to Change Password Activity
-            // val intent = Intent(this, ChangePasswordActivity::class.java)
-            // startActivity(intent)
-
-            // For now, show a placeholder message
-            showPlaceholderMessage("Change Password")
+            val intent = Intent(this, com.iiest10356476.sheguard.ui.auth.NewPasswordActivity::class.java)
+            intent.putExtra(com.iiest10356476.sheguard.ui.auth.NewPasswordActivity.EXTRA_FROM_SETTINGS, true)
+            startActivity(intent)
         }
 
         // Change Language button
         languageButton.setOnClickListener {
-            // TODO: Navigate to Change Language Activity
-            // val intent = Intent(this, ChangeLanguageActivity::class.java)
-            // startActivity(intent)
-
-            // For now, show a placeholder message
-            showPlaceholderMessage("Change Language")
+            showLanguageSelectionDialog()
         }
 
         // Policy button
         policyButton.setOnClickListener {
-            // TODO: Navigate to Policy Activity
-            // val intent = Intent(this, PolicyActivity::class.java)
-            // startActivity(intent)
-
-            // For now, show a placeholder message
-            showPlaceholderMessage("Policy")
+            val intent = Intent(this, PolicyActivity::class.java)
+            startActivity(intent)
         }
 
         // Delete Account button - Show confirmation dialog
         deleteAccountButton.setOnClickListener {
             showDeleteAccountConfirmation()
         }
+    }
+
+    private fun showLanguageSelectionDialog() {
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_language_selection)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.setCancelable(true)
+
+        // Get current language
+        val currentLanguage = LanguageHelper.getSavedLanguage(this)
+
+        // Find views in dialog
+        val radioGroup = dialog.findViewById<RadioGroup>(R.id.language_radio_group)
+        val radioEnglish = dialog.findViewById<RadioButton>(R.id.radio_english)
+        val radioAfrikaans = dialog.findViewById<RadioButton>(R.id.radio_afrikaans)
+        val radioZulu = dialog.findViewById<RadioButton>(R.id.radio_zulu)
+        val radioXhosa = dialog.findViewById<RadioButton>(R.id.radio_xhosa)
+        val cancelButton = dialog.findViewById<LinearLayout>(R.id.cancel_button)
+        val applyButton = dialog.findViewById<LinearLayout>(R.id.apply_button)
+
+        // Set current language as selected
+        when (currentLanguage) {
+            LanguageHelper.LANGUAGE_ENGLISH -> radioEnglish.isChecked = true
+            LanguageHelper.LANGUAGE_AFRIKAANS -> radioAfrikaans.isChecked = true
+            LanguageHelper.LANGUAGE_ZULU -> radioZulu.isChecked = true
+            LanguageHelper.LANGUAGE_XHOSA -> radioXhosa.isChecked = true
+        }
+
+        // Cancel button click
+        cancelButton.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        // Apply button click
+        applyButton.setOnClickListener {
+            val selectedRadioId = radioGroup.checkedRadioButtonId
+            val selectedLanguage = when (selectedRadioId) {
+                R.id.radio_english -> LanguageHelper.LANGUAGE_ENGLISH
+                R.id.radio_afrikaans -> LanguageHelper.LANGUAGE_AFRIKAANS
+                R.id.radio_zulu -> LanguageHelper.LANGUAGE_ZULU
+                R.id.radio_xhosa -> LanguageHelper.LANGUAGE_XHOSA
+                else -> LanguageHelper.LANGUAGE_ENGLISH
+            }
+
+            // Save the selected language
+            LanguageHelper.saveLanguage(this, selectedLanguage)
+
+            // Show confirmation message
+            Toast.makeText(
+                this,
+                "Language changed to ${LanguageHelper.getLanguageDisplayName(selectedLanguage)}",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            dialog.dismiss()
+
+            // Restart activity to apply language change
+            onLanguageChanged()
+        }
+
+        dialog.show()
     }
 
     private fun showDeleteAccountConfirmation() {
@@ -158,41 +205,41 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNavigation() {
-        // Set the current selected item based on your bottom navigation menu
-        // Update this ID to match your actual menu item for settings
-        bottomNavigationView.selectedItemId = R.id.nav_settings
-
-        bottomNavigationView.setOnItemSelectedListener { item ->
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigation.itemIconTintList = null
+        bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
-                    // Navigate to Dashboard/Main Activity
                     val intent = Intent(this, DashboardActivity::class.java)
                     startActivity(intent)
-                    finish()
-                    true
-                }
-                R.id.nav_settings -> {
-                    // Already on settings page
-                    true
-                }
-                R.id.nav_vault -> {
-                    // Navigate to Secure Vault
-                    val intent = Intent(this, SecureVault::class.java)
-                    startActivity(intent)
-                    finish()
                     true
                 }
                 R.id.nav_shetrack -> {
-                    // Navigate to SHETrack
                     val intent = Intent(this, TrackingEventActivity::class.java)
                     startActivity(intent)
-                    finish()
                     true
                 }
-                // Add other navigation items as needed
+                R.id.nav_vault -> {
+                    // Navigate to vault with authentication first
+                    val intent = Intent(this, SecureActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.nav_community -> {
+                    val intent = Intent(this, SheCareActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.nav_settings -> {
+                    // Already on settings - no action needed
+                    true
+                }
                 else -> false
             }
         }
+
+        // Set the current item as selected (Settings)
+        bottomNavigation.selectedItemId = R.id.nav_settings
     }
 
     private fun showPlaceholderMessage(feature: String) {

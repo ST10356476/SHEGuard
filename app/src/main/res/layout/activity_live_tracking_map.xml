@@ -27,7 +27,7 @@
             android:padding="8dp"
             android:scaleType="fitCenter"
             android:src="@drawable/left_arrow"
-            android:contentDescription="Back button"
+            android:contentDescription="@string/back_button_desc"
             tools:ignore="TouchTargetSizeCheck" />
 
         <LinearLayout
@@ -43,17 +43,16 @@
                 android:layout_height="32dp"
                 android:src="@drawable/sheguard_logo"
                 android:scaleType="fitCenter"
-                android:contentDescription="SHEGuard logo" />
+                android:contentDescription="@string/logo_desc" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Live Tracking"
+                android:text="@string/live_tracking_title"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="#6A1B9A" />
-
         </LinearLayout>
 
     </LinearLayout>
@@ -73,7 +72,8 @@
             android:id="@+id/session_id_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Session: SHE1234"
+            android:text="@string/session_label"
+            tools:text="Session: SHE1234"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@android:color/white"
@@ -83,7 +83,7 @@
             android:id="@+id/status_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="🟢 Live Tracking Active"
+            android:text="@string/status_live_active"
             android:textSize="14sp"
             android:textColor="@android:color/white"
             android:layout_marginBottom="4dp" />
@@ -92,7 +92,8 @@
             android:id="@+id/last_update_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Last update: 14:30:25"
+            android:text="@string/last_update_label"
+            tools:text="Last update: 14:30:25"
             android:textSize="12sp"
             android:textColor="#E1BEE7" />
 
@@ -127,7 +128,7 @@
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:background="@drawable/action_button_background"
-            android:text="Share Current Location"
+            android:text="@string/share_current_location"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textSize="14sp" />
@@ -138,14 +139,12 @@
             android:layout_height="48dp"
             android:layout_weight="1"
             android:layout_marginStart="8dp"
-            android:text="Stop Tracking"
+            android:text="@string/stop_tracking"
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@android:color/white"
             android:textAllCaps="false"
             style="?android:attr/borderlessButtonStyle"
             android:background="@drawable/add_contact_button_background" />
-
     </LinearLayout>
-
 </RelativeLayout>

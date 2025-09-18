@@ -21,7 +21,7 @@ import com.iiest10356476.sheguard.R
 import com.iiest10356476.sheguard.services.PanicService
 import kotlinx.coroutines.launch
 
-class DashboardActivity : AppCompatActivity() {
+class DashboardActivity :  BaseActivity() {
 
     companion object {
         private const val TAG = "DashboardActivity"
@@ -93,6 +93,7 @@ class DashboardActivity : AppCompatActivity() {
 
     private fun setupBottomNavigation() {
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigation.itemIconTintList = null
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_home -> {
@@ -111,9 +112,8 @@ class DashboardActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_community -> {
-                    // Navigate to Community activity
-                    // val intent = Intent(this, CommunityActivity::class.java)
-                    // startActivity(intent)
+                    val intent = Intent(this, SheCareActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 R.id.nav_settings -> {

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/purple_light"
+    android:padding="24dp">
+
+    <!-- Dialog Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Language"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#6A1B9A"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp" />
+
+    <!-- Language Options -->
+    <RadioGroup
+        android:id="@+id/language_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp">
+
+        <!-- English Option -->
+        <RadioButton
+            android:id="@+id/radio_english"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="English"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp"
+            android:buttonTint="#6A1B9A"
+            android:background="@drawable/cancel_button_background" />
+
+        <!-- Afrikaans Option -->
+        <RadioButton
+            android:id="@+id/radio_afrikaans"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Afrikaans"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp"
+            android:buttonTint="#6A1B9A"
+            android:background="@drawable/cancel_button_background" />
+
+        <!-- Zulu Option -->
+        <RadioButton
+            android:id="@+id/radio_zulu"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="isiZulu"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp"
+            android:buttonTint="#6A1B9A"
+            android:background="@drawable/cancel_button_background" />
+
+        <!-- Xhosa Option -->
+        <RadioButton
+            android:id="@+id/radio_xhosa"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="isiXhosa"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp"
+            android:buttonTint="#6A1B9A"
+            android:background="@drawable/cancel_button_background" />
+
+    </RadioGroup>
+
+    <!-- Action Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Cancel Button -->
+        <LinearLayout
+            android:id="@+id/cancel_button"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@drawable/cancel_button_background"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginEnd="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#666666" />
+
+        </LinearLayout>
+
+        <!-- Apply Button -->
+        <LinearLayout
+            android:id="@+id/apply_button"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@drawable/action_button_background"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginStart="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apply"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

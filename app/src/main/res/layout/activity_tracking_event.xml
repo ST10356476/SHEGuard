@@ -7,7 +7,6 @@
     android:id="@+id/main"
     android:background="@drawable/purple_gradient_background">
 
-
     <LinearLayout
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
@@ -17,7 +16,6 @@
         android:background="@android:color/white"
         android:paddingHorizontal="20dp"
         android:paddingTop="24dp">
-
 
         <ImageButton
             android:id="@+id/back_button"
@@ -32,7 +30,6 @@
             android:src="@drawable/left_arrow"
             tools:ignore="TouchTargetSizeCheck" />
 
-
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -45,21 +42,19 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/sheguard_logo"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:contentDescription="@string/logo_desc" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="SHETrack"
+                android:text="@string/shetrack_title"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="#6A1B9A" />
-
         </LinearLayout>
-
     </LinearLayout>
-
 
     <ScrollView
         android:layout_width="match_parent"
@@ -76,7 +71,6 @@
             android:paddingHorizontal="24dp"
             android:paddingVertical="40dp">
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,7 +80,6 @@
                 android:gravity="center_horizontal"
                 android:padding="32dp"
                 android:elevation="4dp">
-
 
                 <LinearLayout
                     android:id="@+id/livetrack_button"
@@ -101,15 +94,13 @@
                         android:layout_height="40dp"
                         android:src="@drawable/location_icon"
                         android:scaleType="fitCenter" />
-
                 </LinearLayout>
-
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="Ready to Track - Click to view live location"
+                    android:text="@string/live_ready_title"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"
@@ -120,14 +111,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginHorizontal="16dp"
-                    android:text="Share your location and stay connected with trusted contacts"
+                    android:text="@string/live_ready_subtitle"
                     android:textSize="14sp"
                     android:textColor="#E1BEE7"
                     android:gravity="center"
                     android:lineSpacingExtra="2dp" />
-
             </LinearLayout>
-
 
             <LinearLayout
                 android:id="@+id/start_event_button"
@@ -152,13 +141,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Start New Event Tracking"
+                    android:text="@string/start_event_tracking"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@android:color/white" />
-
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -167,7 +154,6 @@
                 android:orientation="vertical"
                 android:gravity="center_horizontal">
 
-
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
@@ -175,35 +161,29 @@
                     android:padding="20dp"
                     android:scaleType="fitCenter" />
 
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Your Safety Network"
+                    android:text="@string/safety_network_title"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"
                     android:gravity="center" />
-
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginHorizontal="32dp"
-                    android:text="Track your events and keep your trusted contacts informed about your whereabouts for maximum safety."
+                    android:text="@string/safety_network_body"
                     android:textSize="12sp"
                     android:textColor="#E1BEE7"
                     android:gravity="center"
                     android:lineSpacingExtra="2dp" />
-
             </LinearLayout>
-
         </LinearLayout>
-
     </ScrollView>
-
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -216,5 +196,4 @@
         app:itemTextColor="@color/bottom_nav_text_colors"
         app:labelVisibilityMode="labeled"
         app:menu="@menu/bottom_navigation_menu" />
-
 </RelativeLayout>

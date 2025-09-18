@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.iiest10356476.sheguard.R
 
-class LoadingActivity : AppCompatActivity() {
+class LoadingActivity :  BaseActivity() {
 
     private lateinit var logoImage: ImageView
     private lateinit var appName: TextView

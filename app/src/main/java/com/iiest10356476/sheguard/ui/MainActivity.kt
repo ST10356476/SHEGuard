@@ -17,7 +17,7 @@ import com.iiest10356476.sheguard.services.VolumeButtonService
 import com.iiest10356476.sheguard.ui.auth.LoginActivity
 import com.iiest10356476.sheguard.viewmodel.AuthViewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity :  BaseActivity() {
     private val authViewModel: AuthViewModel by viewModels()
     private lateinit var prefs: SharedPreferences
 
