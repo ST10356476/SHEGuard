@@ -9,10 +9,14 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import android.app.Dialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.iiest10356476.sheguard.R
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import com.iiest10356476.sheguard.utils.LanguageHelper
+import com.iiest10356476.sheguard.data.repository.SettingsRepo
+import com.iiest10356476.sheguard.ui.auth.LoginActivity
+
 
 class SettingsActivity : BaseActivity() {
 
@@ -155,23 +159,18 @@ class SettingsActivity : BaseActivity() {
     }
 
     private fun showDeleteAccountConfirmation() {
-        // Create custom dialog
         val dialog = Dialog(this)
         dialog.setContentView(R.layout.dialog_delete_account)
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.setCancelable(true)
 
-        // Find buttons in custom layout
         val cancelButton = dialog.findViewById<LinearLayout>(R.id.cancel_button)
         val deleteButton = dialog.findViewById<LinearLayout>(R.id.delete_button)
 
-        // Cancel button click
         cancelButton.setOnClickListener {
             dialog.dismiss()
-            // Stay on settings page - no additional action needed
         }
 
-        // Delete button click
         deleteButton.setOnClickListener {
             dialog.dismiss()
             // TODO: Implement actual account deletion logic
@@ -182,27 +181,24 @@ class SettingsActivity : BaseActivity() {
     }
 
     private fun performAccountDeletion() {
-        // TODO: Add your actual account deletion logic here
-        // This might include:
-        // 1. API call to delete user data from server
-        // 2. Clear local database/preferences
-        // 3. Sign out user
-        // 4. Navigate to login/welcome screen
+        val repo = SettingsRepo()
 
-        // For now, show a placeholder message
-        Toast.makeText(
-            this,
-            "Account deletion feature will be implemented",
-            Toast.LENGTH_LONG
-        ).show()
+        repo.deleteCurrentUserData { success, error ->
+            if (success) {
+                Toast.makeText(this, "Account deleted", Toast.LENGTH_LONG).show()
 
-        // Example of what you might do after successful deletion:
-        // clearUserData()
-        // val intent = Intent(this, WelcomeActivity::class.java)
-        // intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        // startActivity(intent)
-        // finish()
+                // Go to LoginActivity and clear back stack
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                finish()
+            } else {
+                Toast.makeText(this, "Error: $error", Toast.LENGTH_LONG).show()
+            }
+        }
     }
+
+
 
     private fun setupBottomNavigation() {
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
