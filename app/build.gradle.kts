@@ -18,7 +18,13 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    //added to ignore duplicate licenses for test units
+    packaging {
+        resources {
+            // Pick the first occurrence of any file under META-INF to avoid duplicates
+            pickFirsts += listOf("META-INF/*")
+        }
+    }
     buildTypes {
         release {
             isMinifyEnabled = false

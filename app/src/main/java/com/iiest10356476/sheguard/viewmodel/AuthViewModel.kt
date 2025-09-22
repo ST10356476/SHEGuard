@@ -137,7 +137,7 @@ class AuthViewModel : ViewModel() {
     }
 
     // Validation functions
-    private fun validateSignUpInput(email: String, password: String, fullName: String, dateOfBirth: String): Boolean {
+    fun validateSignUpInput(email: String, password: String, fullName: String, dateOfBirth: String): Boolean {
         return when {
             fullName.isBlank() -> {
                 _errorMessage.value = "Please enter your full name"
@@ -159,7 +159,7 @@ class AuthViewModel : ViewModel() {
         }
     }
 
-    private fun validateSignInInput(email: String, password: String): Boolean {
+    fun validateSignInInput(email: String, password: String): Boolean {
         return when {
             !validateEmail(email) -> {
                 _errorMessage.value = "Please enter a valid email address"
@@ -173,11 +173,11 @@ class AuthViewModel : ViewModel() {
         }
     }
 
-    private fun validateEmail(email: String): Boolean {
+    fun validateEmail(email: String): Boolean {
         return email.isNotBlank() && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
-    private fun validatePassword(password: String): Boolean {
+    fun validatePassword(password: String): Boolean {
         val passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@\$!%*?&])[A-Za-z\\d@\$!%*?&]{8,}$"
         return password.matches(passwordPattern.toRegex())
     }
