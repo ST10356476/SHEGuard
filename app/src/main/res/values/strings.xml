@@ -17,7 +17,9 @@
     <string name="sign_up">Sign up</string>
     <string name="policy">I have read, understood and agree to the Terms and Conditions, understand that by creating this account my information will be handled according to SHEGuard\'s privacy policy.</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="new_password">New Password</string>
     <string name="password">Password</string>
+    <string name="c_password">Current Password</string>
     <string name="date_of_birth">Date of birth</string>
     <string name="email">Email</string>
     <string name="full_name">Full Name</string>

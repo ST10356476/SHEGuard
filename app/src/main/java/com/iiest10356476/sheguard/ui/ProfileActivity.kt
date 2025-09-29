@@ -9,9 +9,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.iiest10356476.sheguard.R
+import com.iiest10356476.sheguard.data.repository.UpdateUserDataRepository
+import kotlinx.coroutines.launch
 
 class ProfileActivity :  BaseActivity() {
+
 
     // UI Components
     private lateinit var firstNameEdit: EditText
@@ -48,7 +52,6 @@ class ProfileActivity :  BaseActivity() {
         firstNameEdit = findViewById(R.id.first_name_edit)
         lastNameEdit = findViewById(R.id.last_name_edit)
         emailEdit = findViewById(R.id.email_edit)
-        phoneEdit = findViewById(R.id.phone_edit)
         dateOfBirthEdit = findViewById(R.id.date_of_birth_edit)
 
         // Initialize buttons
@@ -64,80 +67,51 @@ class ProfileActivity :  BaseActivity() {
             finish() // Return to Settings without saving
         }
     }
+    private val userRepo = UpdateUserDataRepository()
 
     private fun loadUserProfile() {
-        // TODO: Load user data from database/shared preferences
-        // For now, using placeholder data
-
-        // Example of how you might load saved data:
-        // val sharedPref = getSharedPreferences("user_profile", Context.MODE_PRIVATE)
-        // firstNameEdit.setText(sharedPref.getString("first_name", ""))
-        // lastNameEdit.setText(sharedPref.getString("last_name", ""))
-        // emailEdit.setText(sharedPref.getString("email", ""))
-        // phoneEdit.setText(sharedPref.getString("phone", ""))
-        // dateOfBirthEdit.setText(sharedPref.getString("date_of_birth", ""))
-
-        // Placeholder data for demonstration
-        firstNameEdit.setText("")
-        lastNameEdit.setText("")
-        emailEdit.setText("")
-        phoneEdit.setText("")
-        dateOfBirthEdit.setText("")
+        lifecycleScope.launch {
+            val result = userRepo.getUserProfile()
+            result.onSuccess { user ->
+                firstNameEdit.setText(user.fullName.split(" ").firstOrNull() ?: "")
+                lastNameEdit.setText(user.fullName.split(" ").drop(1).joinToString(" "))
+                emailEdit.setText(user.email)
+                dateOfBirthEdit.setText(user.dateOfBirth)
+            }.onFailure {
+                Toast.makeText(this@ProfileActivity, it.message, Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
+    //Took away the Phone Number, and every field is optional
     private fun saveProfile() {
-        // Get values from form fields
         val firstName = firstNameEdit.text.toString().trim()
         val lastName = lastNameEdit.text.toString().trim()
-        val email = emailEdit.text.toString().trim()
-        val phone = phoneEdit.text.toString().trim()
         val dateOfBirth = dateOfBirthEdit.text.toString().trim()
 
-        // Validate required fields
-        if (firstName.isEmpty()) {
-            firstNameEdit.error = "First name is required"
-            firstNameEdit.requestFocus()
+        val fullName = listOf(firstName, lastName).filter { it.isNotEmpty() }.joinToString(" ")
+
+
+        val updates = mutableMapOf<String, Any>()
+        if (fullName.isNotEmpty()) updates["fullName"] = fullName
+        if (dateOfBirth.isNotEmpty()) updates["dateOfBirth"] = dateOfBirth
+        updates["lastLoginAt"] = System.currentTimeMillis()
+
+        if (updates.isEmpty()) {
+            Toast.makeText(this, "Nothing to update", Toast.LENGTH_SHORT).show()
             return
         }
-
-        if (lastName.isEmpty()) {
-            lastNameEdit.error = "Last name is required"
-            lastNameEdit.requestFocus()
-            return
+        lifecycleScope.launch {
+            val result = userRepo.updateUserProfile(updates)
+            result.onSuccess {
+                Toast.makeText(this@ProfileActivity, "Profile updated successfully", Toast.LENGTH_SHORT).show()
+                finish()
+            }.onFailure {
+                Toast.makeText(this@ProfileActivity, it.message, Toast.LENGTH_LONG).show()
+            }
         }
-
-        if (email.isEmpty()) {
-            emailEdit.error = "Email is required"
-            emailEdit.requestFocus()
-            return
-        }
-
-        if (!isValidEmail(email)) {
-            emailEdit.error = "Please enter a valid email"
-            emailEdit.requestFocus()
-            return
-        }
-
-        // TODO: Save user data to database/shared preferences
-        // Example of how you might save data:
-        // val sharedPref = getSharedPreferences("user_profile", Context.MODE_PRIVATE)
-        // with(sharedPref.edit()) {
-        //     putString("first_name", firstName)
-        //     putString("last_name", lastName)
-        //     putString("email", email)
-        //     putString("phone", phone)
-        //     putString("date_of_birth", dateOfBirth)
-        //     apply()
-        // }
-
-        // TODO: Also update user data on your server/backend if applicable
-
-        // Show success message
-        Toast.makeText(this, "Profile updated successfully", Toast.LENGTH_SHORT).show()
-
-        // Return to Settings
-        finish()
     }
+
 
     private fun isValidEmail(email: String): Boolean {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()

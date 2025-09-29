@@ -40,17 +40,7 @@
                 android:textColor="#6A1B9A" />
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/profile_icon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:background="@drawable/button_background"
-            android:clickable="true"
-            android:focusable="true"
-            android:padding="8dp"
-            android:scaleType="fitCenter"
-            android:contentDescription="@string/profile_icon_desc"
-            android:src="@drawable/profile_icon" />
+
     </LinearLayout>
 
     <ScrollView

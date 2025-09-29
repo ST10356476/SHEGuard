@@ -184,31 +184,9 @@
                     android:textColorHint="#999999"
                     android:textColor="#333333"
                     android:textSize="14sp"
+                    android:enabled="false"
                     android:paddingHorizontal="16dp"
                     android:inputType="textEmailAddress"
-                    android:layout_marginBottom="16dp" />
-
-                <!-- Phone Field -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/phone_number_optional_label"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/white"
-                    android:layout_marginBottom="8dp" />
-
-                <EditText
-                    android:id="@+id/phone_edit"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:background="@drawable/cancel_button_background"
-                    android:hint="@string/hint_enter_phone_number"
-                    android:textColorHint="#999999"
-                    android:textColor="#333333"
-                    android:textSize="14sp"
-                    android:paddingHorizontal="16dp"
-                    android:inputType="phone"
                     android:layout_marginBottom="16dp" />
 
                 <!-- Date of Birth Field -->
@@ -217,6 +195,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/dob_optional_label"
                     android:textSize="14sp"
+                    android:enabled="false"
                     android:textStyle="bold"
                     android:textColor="@android:color/white"
                     android:layout_marginBottom="8dp" />
@@ -229,6 +208,7 @@
                     android:hint="@string/dob_hint"
                     android:textColorHint="#999999"
                     android:textColor="#333333"
+                    android:enabled="false"
                     android:textSize="14sp"
                     android:paddingHorizontal="16dp"
                     android:inputType="date"
