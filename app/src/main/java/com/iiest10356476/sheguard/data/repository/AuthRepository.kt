@@ -24,11 +24,18 @@ class AuthRepository {
         return try {
             Log.d(TAG, "=== SIGNUP STARTED ===")
 
+            // Check if email already exists
+            val existingMethods = auth.fetchSignInMethodsForEmail(email).await()
+            if (existingMethods.signInMethods?.isNotEmpty() == true) {
+                Log.e(TAG, " Email already in use: $email")
+                return Result.failure(Exception("Email already registered. Please log in instead."))
+            }
+
             // Create Firebase Auth user
             val authResult = auth.createUserWithEmailAndPassword(email, password).await()
             val firebaseUser = authResult.user ?: throw Exception("User creation failed")
 
-            Log.d(TAG, "✅ Firebase Auth user created!")
+            Log.d(TAG, " Firebase Auth user created!")
 
             // Create user document in Firestore
             val user = User(
@@ -38,20 +45,20 @@ class AuthRepository {
                 dateOfBirth = dateOfBirth
             )
 
-            // Save user data to Firestore
             usersCollection.document(firebaseUser.uid).set(user).await()
-            Log.d(TAG, "✅ User saved to Firestore!")
+            Log.d(TAG, " User saved to Firestore!")
 
             // Send email verification
             firebaseUser.sendEmailVerification().await()
-            Log.d(TAG, "✅ Email verification sent!")
+            Log.d(TAG, " Email verification sent!")
 
             Result.success(user)
         } catch (e: Exception) {
-            Log.e(TAG, "❌ SIGNUP FAILED: ${e.message}")
+            Log.e(TAG, " SIGNUP FAILED: ${e.message}")
             Result.failure(e)
         }
     }
+
 
     // Sign in with email and password
     suspend fun signIn(email: String, password: String): Result<User> {

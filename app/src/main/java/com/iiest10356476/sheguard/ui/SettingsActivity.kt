@@ -186,7 +186,6 @@ class SettingsActivity : BaseActivity() {
         repo.deleteCurrentUserData { success, error ->
             if (success) {
                 Toast.makeText(this, "Account deleted", Toast.LENGTH_LONG).show()
-
                 // Go to LoginActivity and clear back stack
                 val intent = Intent(this, LoginActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
