@@ -9,5 +9,7 @@ data class EmergencyContact(
     // Format phone number for WhatsApp (remove spaces, dashes, etc.)
     fun getFormattedPhoneNumber(): String {
         return phoneNumber.replace(Regex("[^+\\d]"), "")
+
+        // Edite the document
     }
 }
